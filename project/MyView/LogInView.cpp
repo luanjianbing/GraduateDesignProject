@@ -30,6 +30,7 @@ namespace View {
 		// 去数据库中查询当前用户是否存在，登陆成功返回
 		std::string getLogInUserName = ui.lineEditUserName->text().toStdString();
 		std::string getLogInUserPassward = ui.lineEditPassward->text().toStdString();
+
 		bool logInSuccess = Controller::DomainController::getInstance()->userTryLogIn(getLogInUserName, getLogInUserPassward);
 
 		if (logInSuccess) {

@@ -113,7 +113,7 @@ namespace Model {
 	}
 
 	void DataBaseInterface::deleteAndReplaceSatisfiedNewData(const char *table, std::vector<std::vector<std::string>> &data,
-		const char *factorColName, std::string &factorColValue) {
+		const char *factorColName, std::string &factorColValue, bool isNeedQuotationMarks) {
 		char cmdB[100];
 
 		strcpy(cmdB, "delete from ");
@@ -121,7 +121,11 @@ namespace Model {
 		strcat(cmdB, " where ");
 		strcat(cmdB, factorColName);
 		strcat(cmdB, "=");
+		if (isNeedQuotationMarks)
+			strcat(cmdB, "\"");
 		strcat(cmdB, factorColValue.c_str());
+		if (isNeedQuotationMarks)
+			strcat(cmdB, "\"");
 		mysqlOperation(cmdB);
 
 		char cmd[2000];
@@ -306,8 +310,40 @@ namespace Model {
 		return atoi(vect.front().front().c_str());
 	}
 
+	int DataBaseInterface::findRowNumsFromTargetTable(const char *table) {
+		char cmd[256];
+
+		MYSQL_RES *res;
+		MYSQL_ROW col;
+
+		std::vector<std::vector<std::string>> vect;
+		std::vector<std::string> _vect;
+
+		res = NULL;//要先初始化，否则会报错
+
+		strcpy(cmd, "SELECT COUNT(*) FROM ");
+		strcat(cmd, table);
+
+		mysql_free_result(res);
+		mysqlOperation(cmd);
+		res = mysql_store_result(mysql_conn);
+
+		while ((col = mysql_fetch_row(res)) != NULL)		// 每一行访问
+		{
+			for (int i = 0; i < 1; i++) {
+				_vect.push_back(col[i]);
+			}
+			vect.push_back(_vect);
+			for (int i = 0; i < 1; i++) {
+				_vect.pop_back();
+			}
+		}
+
+		return atoi(vect.front().front().c_str());
+	}
+
 	std::vector<std::vector<std::string>> DataBaseInterface::queryAllData(const char * table, const int colNum,
-		const char *factorColName, std::string &factorColValue, const char *orderColNum = "id") {
+		const char *factorColName, std::string &factorColValue, const char *orderColNum, bool isNeedQuotationMarks) {
 		char cmd[100];
 
 		MYSQL_RES *res;
@@ -323,7 +359,11 @@ namespace Model {
 		strcat(cmd, " where ");
 		strcat(cmd, factorColName);
 		strcat(cmd, "=");
+		if (isNeedQuotationMarks)
+			strcat(cmd, "\"");
 		strcat(cmd, factorColValue.c_str());
+		if (isNeedQuotationMarks)
+			strcat(cmd, "\"");
 		strcat(cmd, " order by ");
 		strcat(cmd, orderColNum);
 

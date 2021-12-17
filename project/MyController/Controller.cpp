@@ -34,6 +34,10 @@ namespace Controller {
 }
 
 namespace Controller {
+	Model::UserCacheInterface *DomainController::mUserCache = NULL;
+}
+
+namespace Controller {
 	// 需要在cpp文件中对类中的static变量做初始化，不然会报错
 	DomainController *DomainController::uniqueInstance = nullptr;
 	std::mutex DomainController::mMutex;
@@ -85,11 +89,145 @@ namespace Controller {
 
 	/********************************Database Controller********************************/
 	bool DomainController::userTryLogIn(std::string userName, std::string userPassward) {
+		try
+		{
+			int colNum = mUserCache->getUserAttributesNum() + 1;	// 加上'id'一列
+			std::vector<std::vector<std::string>> mTable = 
+				mDataBase->queryAllData("user_info", colNum, "user_id", userName, "id", true);
+			if (mTable.size() == 0) {	// 验证账户id
+				std::cout << "用户名错误"<< std::endl;
+				return false;
+			}
+			else {	// 验证账户密码
+				std::string tmpQueryPassward = mTable[0][2];
+				if (tmpQueryPassward != userPassward) {
+					std::cout << "密码错误" << std::endl;
+					return false;
+				}
+			}
+			return true;
+		}
+		catch (const std::exception &e)
+		{
+			std::cout << "DomainController::userTryLogIn()->" << e.what() << std::endl;
+			return false;
+		}
 		return true;
 	}
 
-	bool DomainController::userTryRegister(std::string userName, std::string userPassward) {
+	bool DomainController::checkUserIsNewOne(std::string userName) {
+		try
+		{
+			int colNum = mUserCache->getUserAttributesNum() + 1;	// 加上'id'一列
+			std::vector<std::vector<std::string>> mTable =
+				mDataBase->queryAllData("user_info", colNum, "user_id", userName, "id", true);
+			if (mTable.size() == 0) {	// 验证账户id
+				std::cout << "新用户" << std::endl;
+				return true;
+			}
+		}
+		catch (const std::exception &e)
+		{
+			std::cout << "DomainController::checkUserIsNewOne()->" << e.what() << std::endl;
+			return false;
+		}
+		return false;
+	}
+
+	bool DomainController::userTryNewRegister(std::map<std::string, std::string> newUserInfo) {
+		// 新用户，并且权限够
+		try {
+			// 往表格中插入该条用户新建数据
+			int hasRows = mDataBase->findRowNumsFromTargetTable("user_info");
+
+			std::vector<std::string> newUserRow;
+			newUserRow.push_back(std::to_string(hasRows));
+			newUserRow.push_back(newUserInfo.at("userID"));
+			newUserRow.push_back(newUserInfo.at("userPassward"));
+			newUserRow.push_back(newUserInfo.at("userTrueName"));
+			newUserRow.push_back(newUserInfo.at("userProductionLine"));
+			newUserRow.push_back(newUserInfo.at("userAuthority"));
+
+			mDataBase->insertSingleRowData("user_info", newUserRow);
+		}
+		catch (const std::exception &e)
+		{
+			std::cout << "DomainController::userTryNewRegister()->" << e.what() << std::endl;
+			return false;
+		}
 		return true;
+	}
+
+	bool DomainController::userTryModifyInfo(std::map<std::string, std::string> newUserInfo) {
+		// 旧用户，并且权限够
+		try {
+			// 修改该表格中旧用户数据
+			std::string userName = newUserInfo.at("userID");
+			int colNum = mUserCache->getUserAttributesNum() + 1;	// 加上'id'一列
+			std::vector<std::vector<std::string>> mTable =
+				mDataBase->queryAllData("user_info", colNum, "user_id", userName, "id", true);
+
+			mTable.front()[2] = newUserInfo.at("userPassward");
+			mTable.front()[3] = newUserInfo.at("userTrueName");
+			mTable.front()[4] = newUserInfo.at("userProductionLine");
+			mTable.front()[5] = newUserInfo.at("userAuthority");
+
+			mDataBase->deleteAndReplaceSatisfiedNewData("user_info", mTable, "user_id", userName, true);
+		}
+		catch (const std::exception &e)
+		{
+			std::cout << "DomainController::userTryModifyInfo()->" << e.what() << std::endl;
+			return false;
+		}
+		return true;
+	}
+
+	bool DomainController::checkAuthority(std::string toManualAuthority, std::string superUserId) {
+		// 此时保证一定有这个账户
+		try{
+			int colNum = mUserCache->getUserAttributesNum() + 1;	// 加上'id'一列
+			std::vector<std::vector<std::string>> mTable =
+				mDataBase->queryAllData("user_info", colNum, "user_id", superUserId, "id", true);
+			if (mTable.size() == 0) {	// 验证账户id
+				std::cout << "superUserId error" << std::endl;
+				return false;
+			}
+			else {
+				int tmpAuthorityIndex = 5;	// 在表格中用户权限索引
+				std::string superAuthrity = mTable[0][tmpAuthorityIndex];
+				if (mUserCache->checkAuthority(toManualAuthority, superAuthrity)) {
+					return true;
+				}
+			}
+		}
+		catch (const std::exception &e)
+		{
+			std::cout << "DomainController::checkAuthority()->" << e.what() << std::endl;
+			return false;
+		}
+		return false;
+	}
+
+	std::vector<std::vector<std::string>> DomainController::getUsersFromAuthority(std::string toMatchAuthority) {
+		try {
+			int colNum = mUserCache->getUserAttributesNum() + 1;	// 加上'id'一列
+			std::vector<std::vector<std::string>> mTable =
+				mDataBase->queryAllData("user_info", colNum, "user_authority", toMatchAuthority, "id", true);
+			std::vector<std::vector<std::string>> tmpInfo(mTable.size());
+
+			for (int i = 0; i < mTable.size(); ++i) {
+				tmpInfo[i].push_back(mTable[i][1]);	// user_id，必须保证至少有这个
+				tmpInfo[i].push_back(mTable[i][3]);	// user_true_name
+				tmpInfo[i].push_back(mTable[i][4]);	// user_production_line
+			}
+			return tmpInfo;
+		}
+		catch (const std::exception &e)
+		{
+			std::cout << "DomainController::getUsersFromAuthority()->" << e.what() << std::endl;
+			return{};
+		}
+		return{};
 	}
 
 	std::vector<std::string> DomainController::readAllModelNames() {
@@ -466,5 +604,10 @@ namespace Controller {
 
 	std::vector<int> DomainController::getTargetTaskErrorCheck(int taskIndex) {
 		return mAlgorithm->getTargetTaskErrorCheck(taskIndex);
+	}
+
+	/********************************UserCache Controller********************************/
+	std::vector<std::string> DomainController::getUserAuthorities() {
+		return mUserCache->getUserAuthorities();
 	}
 }

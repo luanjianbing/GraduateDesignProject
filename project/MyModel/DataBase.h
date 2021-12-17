@@ -48,7 +48,7 @@ namespace Model {
 		void deleteAndReplaceNewData(const char *table, std::vector<std::vector<std::string>> &data);
 		// 删除表中符合条件的所有数据并替代
 		void deleteAndReplaceSatisfiedNewData(const char *table, std::vector<std::vector<std::string>> &data, 
-			const char *factorColName, std::string &factorColValue);
+			const char *factorColName, std::string &factorColValue, bool isNeedQuotationMarks = false);
 		void deleteAndReplaceSatisfiedNewData(const char *table, std::vector<std::vector<std::string>> &data,
 			const char *factorColName, int &factorColValue);
 		// 读取表中的所有数据，返回一个二维数组
@@ -61,9 +61,11 @@ namespace Model {
 		bool findTargetTable(const char *table);
 		// 查询某张表有多少列
 		int findColNumsFromTargetTable(const char *table);
+		// 查询某张表有多少行
+		int findRowNumsFromTargetTable(const char *table);
 		// 按条件查询某张表，默认按id排序
 		std::vector<std::vector<std::string>> queryAllData(const char * table, const int colNum, 
-			const char *factorColName, std::string &factorColValue, const char *orderColNum);
+			const char *factorColName, std::string &factorColValue, const char *orderColNum = "id", bool isNeedQuotationMarks = false);
 		// 查询排序
 		std::vector<std::vector<std::string>> queryAllData(const char * table, const int colNum, const char *orderColNum);
 

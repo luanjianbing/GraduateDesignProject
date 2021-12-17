@@ -6,6 +6,7 @@
 #include "../MyModel/Camera.h"
 #include "../MyModel/DataBase.h"
 #include "../MyModel/Algorithm.h"
+#include "../MyModel/UserCache.h"
 
 #include <mutex>
 
@@ -79,10 +80,25 @@ namespace Controller {
 		static Model::AlgorithmInterface *mAlgorithm;
 	};
 
+	class UserCacheController {
+	public:
+		UserCacheController() {
+			if (mUserCache == NULL)
+				mUserCache = new Model::UserCacheInterface();
+		}
+		~UserCacheController() {
+			if (mUserCache != NULL)
+				delete mUserCache;
+		}
+	protected:
+		static Model::UserCacheInterface *mUserCache;
+	};
+
 	class DomainController : public QObject, 
 		public CameraController, 
 		public DataBaseController,
-		public AlgorithmController{
+		public AlgorithmController,
+		public UserCacheController{
 		//Q_OBJECT
 		//QThread workerThread;
 		//CameraSingleShotWorker *worker = nullptr;
@@ -98,7 +114,15 @@ namespace Controller {
 		// 用户登录
 		bool userTryLogIn(std::string userName, std::string userPassward);
 		// 用户注册
-		bool userTryRegister(std::string userName, std::string userPassward);
+		bool userTryNewRegister(std::map<std::string, std::string> newUserInfo);
+		// 用户已经存在，修改其中的信息
+		bool userTryModifyInfo(std::map<std::string, std::string> newUserInfo);
+		// 检查用户是否是未存在的新用户
+		bool checkUserIsNewOne(std::string userName);
+		// 判断权限是否符合要求
+		bool checkAuthority(std::string toManualAuthority, std::string superUserId);
+		// 查询某个权限的所有用户
+		std::vector<std::vector<std::string>> getUsersFromAuthority(std::string toMatchAuthority);
 
 		// model_name表
 		std::vector<std::string> readAllModelNames();	// 读取已经存取的model模型名称
@@ -120,6 +144,10 @@ namespace Controller {
 		std::vector<std::string> getDetectTypeSettingNames();	// 读取需要检测的类型名称
 		std::vector<std::vector<std::string>> getDetectTypeSettingParamNames();	// 读取各类检测类型需要人工输入的参数
 		
+		// UserCacheController实现函数
+		std::vector<std::string> getUserAuthorities();
+
+
 		// 下面是算法测试函数
 		// 建立模型时调用
 		void Check1TestSettingPreprocess1(cv::Mat &src);

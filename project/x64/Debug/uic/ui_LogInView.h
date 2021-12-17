@@ -132,7 +132,7 @@ public:
     void retranslateUi(QDialog *LogInView)
     {
         LogInView->setWindowTitle(QApplication::translate("LogInView", "LogIn", nullptr));
-        labelUserName->setText(QApplication::translate("LogInView", "\347\224\250\346\210\267\345\220\215\357\274\232", nullptr));
+        labelUserName->setText(QApplication::translate("LogInView", "\347\224\250\346\210\267ID\357\274\232", nullptr));
         labelPassward->setText(QApplication::translate("LogInView", "\345\257\206\347\240\201\357\274\232", nullptr));
         label->setText(QString());
         buttonCancel->setText(QApplication::translate("LogInView", "\345\217\226\346\266\210", nullptr));

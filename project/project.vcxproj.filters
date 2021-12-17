@@ -98,6 +98,9 @@
     <ClCompile Include="MyView\LauncherView.cpp">
       <Filter>Source Files\View</Filter>
     </ClCompile>
+    <ClCompile Include="MyModel\UserCache.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyModel\Camera.h">
@@ -111,6 +114,9 @@
     </ClInclude>
     <ClInclude Include="MyController\Controller.h">
       <Filter>Header Files\ControllerHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="MyModel\UserCache.h">
+      <Filter>Header Files\ModelHeader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

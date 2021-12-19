@@ -34,6 +34,11 @@ namespace View {
 		bool logInSuccess = Controller::DomainController::getInstance()->userTryLogIn(getLogInUserName, getLogInUserPassward);
 
 		if (logInSuccess) {
+			// 设置当前用户缓存信息
+			std::map<std::string, std::string> curUserInfo = Controller::DomainController::getInstance()->getTargetUserInfo(getLogInUserName);
+			// 将当前用户信息保存到usercache中
+			Controller::DomainController::getInstance()->setCurrentUser(curUserInfo);
+
 			accept();
 		}
 		else {

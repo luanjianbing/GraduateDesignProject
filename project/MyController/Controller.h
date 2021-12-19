@@ -123,6 +123,8 @@ namespace Controller {
 		bool checkAuthority(std::string toManualAuthority, std::string superUserId);
 		// 查询某个权限的所有用户
 		std::vector<std::vector<std::string>> getUsersFromAuthority(std::string toMatchAuthority);
+		// 查询某个用户的相关信息
+		std::map<std::string, std::string> getTargetUserInfo(std::string userID);
 
 		// model_name表
 		std::vector<std::string> readAllModelNames();	// 读取已经存取的model模型名称
@@ -146,6 +148,7 @@ namespace Controller {
 		
 		// UserCacheController实现函数
 		std::vector<std::string> getUserAuthorities();
+		void setCurrentUser(std::map<std::string, std::string> userInfo);
 
 
 		// 下面是算法测试函数

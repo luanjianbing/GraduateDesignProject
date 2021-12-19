@@ -246,6 +246,9 @@ public:
 
         retranslateUi(RegisterNewUserView);
 
+        buttonModify->setDefault(true);
+
+
         QMetaObject::connectSlotsByName(RegisterNewUserView);
     } // setupUi
 

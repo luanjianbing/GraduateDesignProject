@@ -6,6 +6,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <string>
 
 namespace Model {
 	class UserCacheInterface {
@@ -41,13 +42,16 @@ namespace Model {
 
 		// 以字符串数组返回所有权限类型
 		std::vector<std::string> getUserAuthorities();
-		// 返回User的用户个数
+		// 返回User的用户属性个数
 		int getUserAttributesNum();
 		// 判断权限大小，后面一个权限是否可以操作前面的权限
 		bool checkAuthority(std::string firstAuthority, std::string secondAuthority);
 
+		// 设置当前登录进来的用户的一些信息
+		void setCurrentUser(std::map<std::string, std::string> userInfo);
+
 	private:
-		User mUser;	// 当前系统用户
+		User mCurrentUser;	// 当前系统用户
 	};
 }
 

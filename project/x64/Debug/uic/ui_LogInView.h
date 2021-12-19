@@ -123,7 +123,7 @@ public:
 
         retranslateUi(LogInView);
 
-        buttonLogIn->setDefault(false);
+        buttonLogIn->setDefault(true);
 
 
         QMetaObject::connectSlotsByName(LogInView);

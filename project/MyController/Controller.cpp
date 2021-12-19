@@ -230,6 +230,33 @@ namespace Controller {
 		return{};
 	}
 
+	std::map<std::string, std::string> DomainController::getTargetUserInfo(std::string userID) {
+		try {
+			int colNum = mUserCache->getUserAttributesNum() + 1;	// 加上'id'一列
+			std::vector<std::vector<std::string>> mTable =
+				mDataBase->queryAllData("user_info", colNum, "user_id", userID, "id", true);
+			std::map<std::string, std::string> tmpInfo;
+
+			if (mTable.size() != 1) {
+				std::cout << "query target user info error" << std::endl;
+			}
+			else {
+				tmpInfo.insert({ "userID", mTable[0][1] });
+				tmpInfo.insert({ "userTrueName", mTable[0][3] });
+				tmpInfo.insert({ "userProductionLine", mTable[0][4] });
+				tmpInfo.insert({ "userAuthority", mTable[0][5] });
+			}
+
+			return tmpInfo;
+		}
+		catch (const std::exception &e)
+		{
+			std::cout << "DomainController::getTargetUserInfo()->" << e.what() << std::endl;
+			return{};
+		}
+		return{};
+	}
+
 	std::vector<std::string> DomainController::readAllModelNames() {
 		try
 		{
@@ -609,5 +636,9 @@ namespace Controller {
 	/********************************UserCache Controller********************************/
 	std::vector<std::string> DomainController::getUserAuthorities() {
 		return mUserCache->getUserAuthorities();
+	}
+
+	void DomainController::setCurrentUser(std::map<std::string, std::string> userInfo) {
+		return mUserCache->setCurrentUser(userInfo);
 	}
 }

@@ -52,9 +52,8 @@ public:
     QGridLayout *gridLayout_13;
     QWidget *widget;
     QGridLayout *gridLayout_6;
-    QLabel *label_7;
-    QSpacerItem *horizontalSpacer;
     QSpacerItem *horizontalSpacer_2;
+    QLabel *label_7;
     QGroupBox *groupBox;
     QGridLayout *gridLayout_5;
     QLabel *label;
@@ -217,6 +216,10 @@ public:
         gridLayout_6->setSpacing(6);
         gridLayout_6->setContentsMargins(11, 11, 11, 11);
         gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_6->addItem(horizontalSpacer_2, 0, 1, 1, 1);
+
         label_7 = new QLabel(widget);
         label_7->setObjectName(QString::fromUtf8("label_7"));
         QFont font1;
@@ -231,19 +234,10 @@ public:
         label_7->setAlignment(Qt::AlignCenter);
         label_7->setWordWrap(false);
 
-        gridLayout_6->addWidget(label_7, 0, 1, 1, 1);
+        gridLayout_6->addWidget(label_7, 0, 0, 1, 1);
 
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_6->addItem(horizontalSpacer, 0, 0, 1, 1);
-
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_6->addItem(horizontalSpacer_2, 0, 2, 1, 1);
-
-        gridLayout_6->setColumnStretch(0, 1);
-        gridLayout_6->setColumnStretch(1, 6);
-        gridLayout_6->setColumnStretch(2, 1);
+        gridLayout_6->setColumnStretch(0, 9);
+        gridLayout_6->setColumnStretch(1, 1);
 
         gridLayout_13->addWidget(widget, 0, 0, 1, 1);
 
@@ -256,42 +250,51 @@ public:
         gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
         label = new QLabel(groupBox);
         label->setObjectName(QString::fromUtf8("label"));
+        label->setFrameShape(QFrame::WinPanel);
         label->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
 
         gridLayout_5->addWidget(label, 0, 0, 1, 1);
 
         labelUserID = new QLabel(groupBox);
         labelUserID->setObjectName(QString::fromUtf8("labelUserID"));
+        labelUserID->setFrameShape(QFrame::NoFrame);
+        labelUserID->setAlignment(Qt::AlignCenter);
 
         gridLayout_5->addWidget(labelUserID, 0, 1, 1, 1);
 
         label_2 = new QLabel(groupBox);
         label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setFrameShape(QFrame::WinPanel);
 
         gridLayout_5->addWidget(label_2, 1, 0, 1, 1);
 
         labelTrueName = new QLabel(groupBox);
         labelTrueName->setObjectName(QString::fromUtf8("labelTrueName"));
+        labelTrueName->setAlignment(Qt::AlignCenter);
 
         gridLayout_5->addWidget(labelTrueName, 1, 1, 1, 1);
 
         label_3 = new QLabel(groupBox);
         label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setFrameShape(QFrame::WinPanel);
 
         gridLayout_5->addWidget(label_3, 2, 0, 1, 1);
 
         labelProductionLine = new QLabel(groupBox);
         labelProductionLine->setObjectName(QString::fromUtf8("labelProductionLine"));
+        labelProductionLine->setAlignment(Qt::AlignCenter);
 
         gridLayout_5->addWidget(labelProductionLine, 2, 1, 1, 1);
 
         label_10 = new QLabel(groupBox);
         label_10->setObjectName(QString::fromUtf8("label_10"));
+        label_10->setFrameShape(QFrame::WinPanel);
 
         gridLayout_5->addWidget(label_10, 3, 0, 1, 1);
 
         labelOnlineStartTime = new QLabel(groupBox);
         labelOnlineStartTime->setObjectName(QString::fromUtf8("labelOnlineStartTime"));
+        labelOnlineStartTime->setAlignment(Qt::AlignCenter);
 
         gridLayout_5->addWidget(labelOnlineStartTime, 3, 1, 1, 1);
 
@@ -306,91 +309,109 @@ public:
         gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
         label_16 = new QLabel(widget_2);
         label_16->setObjectName(QString::fromUtf8("label_16"));
+        label_16->setFrameShape(QFrame::WinPanel);
 
         gridLayout_7->addWidget(label_16, 1, 2, 1, 1);
 
         label_17 = new QLabel(widget_2);
         label_17->setObjectName(QString::fromUtf8("label_17"));
+        label_17->setFrameShape(QFrame::WinPanel);
 
         gridLayout_7->addWidget(label_17, 2, 0, 1, 1);
 
         label_14 = new QLabel(widget_2);
         label_14->setObjectName(QString::fromUtf8("label_14"));
+        label_14->setFrameShape(QFrame::WinPanel);
 
         gridLayout_7->addWidget(label_14, 4, 0, 1, 1);
 
         labelNowOKQuantity = new QLabel(widget_2);
         labelNowOKQuantity->setObjectName(QString::fromUtf8("labelNowOKQuantity"));
+        labelNowOKQuantity->setAlignment(Qt::AlignCenter);
 
         gridLayout_7->addWidget(labelNowOKQuantity, 4, 1, 1, 1);
 
         labelAlreadyOKQuantity = new QLabel(widget_2);
         labelAlreadyOKQuantity->setObjectName(QString::fromUtf8("labelAlreadyOKQuantity"));
+        labelAlreadyOKQuantity->setAlignment(Qt::AlignCenter);
 
         gridLayout_7->addWidget(labelAlreadyOKQuantity, 2, 1, 1, 1);
 
         labelNowFinishQuantity = new QLabel(widget_2);
         labelNowFinishQuantity->setObjectName(QString::fromUtf8("labelNowFinishQuantity"));
+        labelNowFinishQuantity->setAlignment(Qt::AlignCenter);
 
         gridLayout_7->addWidget(labelNowFinishQuantity, 3, 1, 1, 1);
 
         label_9 = new QLabel(widget_2);
         label_9->setObjectName(QString::fromUtf8("label_9"));
+        label_9->setFrameShape(QFrame::WinPanel);
 
         gridLayout_7->addWidget(label_9, 1, 0, 1, 1);
 
         labelOrderNumber = new QLabel(widget_2);
         labelOrderNumber->setObjectName(QString::fromUtf8("labelOrderNumber"));
+        labelOrderNumber->setAlignment(Qt::AlignCenter);
 
         gridLayout_7->addWidget(labelOrderNumber, 0, 1, 1, 1);
 
         label_13 = new QLabel(widget_2);
         label_13->setObjectName(QString::fromUtf8("label_13"));
+        label_13->setFrameShape(QFrame::WinPanel);
 
         gridLayout_7->addWidget(label_13, 0, 2, 1, 1);
 
         label_15 = new QLabel(widget_2);
         label_15->setObjectName(QString::fromUtf8("label_15"));
+        label_15->setFrameShape(QFrame::WinPanel);
 
         gridLayout_7->addWidget(label_15, 4, 2, 1, 1);
 
         labelOrderQuantity = new QLabel(widget_2);
         labelOrderQuantity->setObjectName(QString::fromUtf8("labelOrderQuantity"));
+        labelOrderQuantity->setAlignment(Qt::AlignCenter);
 
         gridLayout_7->addWidget(labelOrderQuantity, 1, 1, 1, 1);
 
         label_12 = new QLabel(widget_2);
         label_12->setObjectName(QString::fromUtf8("label_12"));
+        label_12->setFrameShape(QFrame::WinPanel);
 
         gridLayout_7->addWidget(label_12, 3, 0, 1, 1);
 
         label_8 = new QLabel(widget_2);
         label_8->setObjectName(QString::fromUtf8("label_8"));
+        label_8->setFrameShape(QFrame::WinPanel);
 
         gridLayout_7->addWidget(label_8, 0, 0, 1, 1);
 
         label_18 = new QLabel(widget_2);
         label_18->setObjectName(QString::fromUtf8("label_18"));
+        label_18->setFrameShape(QFrame::WinPanel);
 
         gridLayout_7->addWidget(label_18, 2, 2, 1, 1);
 
         labelCreateTime = new QLabel(widget_2);
         labelCreateTime->setObjectName(QString::fromUtf8("labelCreateTime"));
+        labelCreateTime->setAlignment(Qt::AlignCenter);
 
         gridLayout_7->addWidget(labelCreateTime, 0, 3, 1, 1);
 
         labelAlreadyFinishQuantity = new QLabel(widget_2);
         labelAlreadyFinishQuantity->setObjectName(QString::fromUtf8("labelAlreadyFinishQuantity"));
+        labelAlreadyFinishQuantity->setAlignment(Qt::AlignCenter);
 
         gridLayout_7->addWidget(labelAlreadyFinishQuantity, 1, 3, 1, 1);
 
         labelAlreadyNGQuantity = new QLabel(widget_2);
         labelAlreadyNGQuantity->setObjectName(QString::fromUtf8("labelAlreadyNGQuantity"));
+        labelAlreadyNGQuantity->setAlignment(Qt::AlignCenter);
 
         gridLayout_7->addWidget(labelAlreadyNGQuantity, 2, 3, 1, 1);
 
         labelNowNGQuantity = new QLabel(widget_2);
         labelNowNGQuantity->setObjectName(QString::fromUtf8("labelNowNGQuantity"));
+        labelNowNGQuantity->setAlignment(Qt::AlignCenter);
 
         gridLayout_7->addWidget(labelNowNGQuantity, 4, 3, 1, 1);
 
@@ -434,6 +455,7 @@ public:
 
         lineEditLoadOrderNumberUserTargetQuantity = new QLineEdit(groupBox_3);
         lineEditLoadOrderNumberUserTargetQuantity->setObjectName(QString::fromUtf8("lineEditLoadOrderNumberUserTargetQuantity"));
+        lineEditLoadOrderNumberUserTargetQuantity->setEnabled(false);
 
         gridLayout_10->addWidget(lineEditLoadOrderNumberUserTargetQuantity, 1, 1, 1, 2);
 
@@ -444,6 +466,7 @@ public:
 
         lineEditLoadOrderNumberUserTargetUnFinishQuantity = new QLineEdit(groupBox_3);
         lineEditLoadOrderNumberUserTargetUnFinishQuantity->setObjectName(QString::fromUtf8("lineEditLoadOrderNumberUserTargetUnFinishQuantity"));
+        lineEditLoadOrderNumberUserTargetUnFinishQuantity->setEnabled(false);
 
         gridLayout_10->addWidget(lineEditLoadOrderNumberUserTargetUnFinishQuantity, 2, 1, 1, 2);
 
@@ -457,7 +480,6 @@ public:
         gridLayout_10->addWidget(buttonSureInLoadOrderNumber, 3, 2, 1, 1);
 
         comboBoxLoadOrderNumberUsers = new QComboBox(groupBox_3);
-        comboBoxLoadOrderNumberUsers->addItem(QString());
         comboBoxLoadOrderNumberUsers->setObjectName(QString::fromUtf8("comboBoxLoadOrderNumberUsers"));
 
         gridLayout_10->addWidget(comboBoxLoadOrderNumberUsers, 0, 1, 1, 2);
@@ -504,7 +526,6 @@ public:
         gridLayout_8->addWidget(label_6, 0, 0, 1, 1);
 
         comboBoxLoadUserOrderNumbers = new QComboBox(groupBox_2);
-        comboBoxLoadUserOrderNumbers->addItem(QString());
         comboBoxLoadUserOrderNumbers->setObjectName(QString::fromUtf8("comboBoxLoadUserOrderNumbers"));
 
         gridLayout_8->addWidget(comboBoxLoadUserOrderNumbers, 0, 1, 1, 2);
@@ -516,6 +537,7 @@ public:
 
         lineEditLoadUserOrderNumberTargetQuantity = new QLineEdit(groupBox_2);
         lineEditLoadUserOrderNumberTargetQuantity->setObjectName(QString::fromUtf8("lineEditLoadUserOrderNumberTargetQuantity"));
+        lineEditLoadUserOrderNumberTargetQuantity->setEnabled(false);
 
         gridLayout_8->addWidget(lineEditLoadUserOrderNumberTargetQuantity, 1, 1, 1, 2);
 
@@ -526,6 +548,7 @@ public:
 
         lineEditLoadUserOrderNumberTargetUnFinishQuantity = new QLineEdit(groupBox_2);
         lineEditLoadUserOrderNumberTargetUnFinishQuantity->setObjectName(QString::fromUtf8("lineEditLoadUserOrderNumberTargetUnFinishQuantity"));
+        lineEditLoadUserOrderNumberTargetUnFinishQuantity->setEnabled(false);
 
         gridLayout_8->addWidget(lineEditLoadUserOrderNumberTargetUnFinishQuantity, 2, 1, 1, 2);
 
@@ -535,6 +558,7 @@ public:
 
         buttonSureInLoadUser = new QPushButton(groupBox_2);
         buttonSureInLoadUser->setObjectName(QString::fromUtf8("buttonSureInLoadUser"));
+        buttonSureInLoadUser->setEnabled(false);
 
         gridLayout_8->addWidget(buttonSureInLoadUser, 3, 2, 1, 1);
 
@@ -620,6 +644,8 @@ public:
         retranslateUi(projectClass);
 
         tabWidget->setCurrentIndex(0);
+        comboBoxLoadOrderNumberUsers->setCurrentIndex(-1);
+        comboBoxLoadUserOrderNumbers->setCurrentIndex(-1);
 
 
         QMetaObject::connectSlotsByName(projectClass);
@@ -665,31 +691,28 @@ public:
         labelNowNGQuantity->setText(QApplication::translate("projectClass", "/", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tabRealTimeStatistics), QApplication::translate("projectClass", "\345\256\236\346\227\266\347\273\237\350\256\241", nullptr));
         QTreeWidgetItem *___qtreewidgetitem = treeWidgetOrderNumberToUser->headerItem();
-        ___qtreewidgetitem->setText(2, QApplication::translate("projectClass", "\346\234\252\345\256\214\346\210\220\346\225\260\351\207\217", nullptr));
-        ___qtreewidgetitem->setText(1, QApplication::translate("projectClass", "\345\267\262\345\256\214\346\210\220\346\225\260\351\207\217", nullptr));
+        ___qtreewidgetitem->setText(2, QApplication::translate("projectClass", "\345\267\262\345\256\214\346\210\220\346\225\260\351\207\217", nullptr));
+        ___qtreewidgetitem->setText(1, QApplication::translate("projectClass", "\346\200\273\346\225\260", nullptr));
         ___qtreewidgetitem->setText(0, QApplication::translate("projectClass", "\350\256\242\345\215\225\347\274\226\345\217\267-\347\224\250\346\210\267\345\220\215", nullptr));
         groupBox_3->setTitle(QApplication::translate("projectClass", "\350\257\246\347\273\206\344\277\241\346\201\257", nullptr));
         label_20->setText(QApplication::translate("projectClass", "\347\224\250\346\210\267\345\220\215\357\274\232", nullptr));
         label_22->setText(QApplication::translate("projectClass", "\351\234\200\345\256\214\346\210\220\346\225\260\351\207\217\357\274\232", nullptr));
         label_21->setText(QApplication::translate("projectClass", "\346\234\252\345\256\214\346\210\220\346\225\260\351\207\217\357\274\232", nullptr));
         lineEditLoadOrderNumberUserTargetUnFinishQuantity->setText(QString());
-        buttonSureInLoadOrderNumber->setText(QApplication::translate("projectClass", "\347\241\256\350\256\244\344\277\256\346\224\271", nullptr));
-        comboBoxLoadOrderNumberUsers->setItemText(0, QApplication::translate("projectClass", "(add new user)", nullptr));
-
+        buttonSureInLoadOrderNumber->setText(QApplication::translate("projectClass", "\347\241\256\350\256\244\344\277\241\346\201\257", nullptr));
         label_4->setText(QApplication::translate("projectClass", "\350\256\242\345\215\225\347\274\226\345\217\267\357\274\232", nullptr));
         buttonToLoadOrderNumber->setText(QApplication::translate("projectClass", "\345\212\240\350\275\275", nullptr));
         QTreeWidgetItem *___qtreewidgetitem1 = treeWidgetUserToOrderNumber->headerItem();
-        ___qtreewidgetitem1->setText(2, QApplication::translate("projectClass", "\346\234\252\345\256\214\346\210\220\346\225\260\351\207\217", nullptr));
-        ___qtreewidgetitem1->setText(1, QApplication::translate("projectClass", "\345\267\262\345\256\214\346\210\220\346\225\260\351\207\217", nullptr));
+        ___qtreewidgetitem1->setText(2, QApplication::translate("projectClass", "\345\267\262\345\256\214\346\210\220\346\225\260\351\207\217", nullptr));
+        ___qtreewidgetitem1->setText(1, QApplication::translate("projectClass", "\346\200\273\346\225\260", nullptr));
         ___qtreewidgetitem1->setText(0, QApplication::translate("projectClass", "\347\224\250\346\210\267\345\220\215-\350\256\242\345\215\225\347\274\226\345\217\267", nullptr));
         groupBox_2->setTitle(QApplication::translate("projectClass", "\350\257\246\347\273\206\344\277\241\346\201\257", nullptr));
         label_6->setText(QApplication::translate("projectClass", "\350\256\242\345\215\225\347\274\226\345\217\267\357\274\232", nullptr));
-        comboBoxLoadUserOrderNumbers->setItemText(0, QApplication::translate("projectClass", "(add new order)", nullptr));
-
+        comboBoxLoadUserOrderNumbers->setCurrentText(QString());
         label_11->setText(QApplication::translate("projectClass", "\351\234\200\345\256\214\346\210\220\346\225\260\351\207\217\357\274\232", nullptr));
         label_19->setText(QApplication::translate("projectClass", "\346\234\252\345\256\214\346\210\220\346\225\260\351\207\217\357\274\232", nullptr));
         lineEditLoadUserOrderNumberTargetUnFinishQuantity->setText(QString());
-        buttonSureInLoadUser->setText(QApplication::translate("projectClass", "\347\241\256\350\256\244\344\277\256\346\224\271", nullptr));
+        buttonSureInLoadUser->setText(QApplication::translate("projectClass", "\347\241\256\350\256\244\344\277\241\346\201\257", nullptr));
         label_5->setText(QApplication::translate("projectClass", "\347\224\250\346\210\267\345\220\215\357\274\232", nullptr));
         buttonToLoadUser->setText(QApplication::translate("projectClass", "\345\212\240\350\275\275", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tabDataSetting), QApplication::translate("projectClass", "\350\256\242\345\215\225\350\256\276\347\275\256", nullptr));

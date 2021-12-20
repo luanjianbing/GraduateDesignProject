@@ -46,9 +46,10 @@ namespace Model {
 		int getUserAttributesNum();
 		// 判断权限大小，后面一个权限是否可以操作前面的权限
 		bool checkAuthority(std::string firstAuthority, std::string secondAuthority);
-
 		// 设置当前登录进来的用户的一些信息
 		void setCurrentUser(std::map<std::string, std::string> userInfo);
+		// 以Map形式返回当前系统用户的相关信息
+		std::map<std::string, std::string> getCurrentUser();
 
 	private:
 		User mCurrentUser;	// 当前系统用户

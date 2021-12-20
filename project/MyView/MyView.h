@@ -11,6 +11,9 @@
 #include "QListWidgetCamerasItem.h"
 #include "QListWidgetErrorItem.h"
 
+#include <QDateTime>
+#include <QInputDialog>
+
 namespace View {
 
 	class MyView : public QMainWindow
@@ -55,6 +58,11 @@ namespace View {
 			double mBlockTextDisplayFontScale = 6;
 			int mBlockTextDisplayFontThickness = 12;
 
+			// 订单管理相关
+			std::map<std::string, std::string> mCurrentUser;
+			std::string mCurrentOrderNumber = "";
+			std::vector<std::vector<std::string>> mCurrentMsgSearchByOrderNum;
+
 		private:
 			// 初始化根据模型名称获取的数据
 			void initModelMsg();
@@ -68,6 +76,14 @@ namespace View {
 			void updateErrorItemDisplay();
 			// 更新处理结果block显示
 			void updateProcessBlockResult();
+			// 初始化订单管理相关显示
+			void initOrderMsg();
+			// 初始化使用人员信息
+			void initUserMsg();
+			// 根据订单编号查询相关信息
+			void updateOrderMsgSearchByOrderNumber(std::string orderNumber);
+			// 根据用户编号查询订单相关信息
+			void updateOrderMsgSearchByUserID(std::string userID);
 
 		private slots:
 			// 图像设置
@@ -78,6 +94,13 @@ namespace View {
 			void onSignalCurRunModel(std::string);
 			// 响应listWidgetCamerasItem点击信号
 			void onListWidgetCamerasItemPressed(int);
+			// 响应创建订单编号
+			void onButtonToLoadOrderNumber();
+			// 响应combobox切换
+			void onComboBoxLoadOrderNumberUsers(int);
+			// 响应加载用户
+			void onButtonToLoadUser();
+
 		signals:
 			void signalClose();
 		protected:

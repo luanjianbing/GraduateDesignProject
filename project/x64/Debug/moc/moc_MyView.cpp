@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_View__MyView_t {
-    QByteArrayData data[8];
-    char stringdata0[125];
+    QByteArrayData data[11];
+    char stringdata0[201];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,13 +38,19 @@ QT_MOC_LITERAL(3, 26, 20), // "onActionImageSetting"
 QT_MOC_LITERAL(4, 47, 14), // "onActionSignal"
 QT_MOC_LITERAL(5, 62, 19), // "onSignalCurRunModel"
 QT_MOC_LITERAL(6, 82, 11), // "std::string"
-QT_MOC_LITERAL(7, 94, 30) // "onListWidgetCamerasItemPressed"
+QT_MOC_LITERAL(7, 94, 30), // "onListWidgetCamerasItemPressed"
+QT_MOC_LITERAL(8, 125, 25), // "onButtonToLoadOrderNumber"
+QT_MOC_LITERAL(9, 151, 30), // "onComboBoxLoadOrderNumberUsers"
+QT_MOC_LITERAL(10, 182, 18) // "onButtonToLoadUser"
 
     },
     "View::MyView\0signalClose\0\0"
     "onActionImageSetting\0onActionSignal\0"
     "onSignalCurRunModel\0std::string\0"
-    "onListWidgetCamerasItemPressed"
+    "onListWidgetCamerasItemPressed\0"
+    "onButtonToLoadOrderNumber\0"
+    "onComboBoxLoadOrderNumberUsers\0"
+    "onButtonToLoadUser"
 };
 #undef QT_MOC_LITERAL
 
@@ -54,7 +60,7 @@ static const uint qt_meta_data_View__MyView[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -62,13 +68,16 @@ static const uint qt_meta_data_View__MyView[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   39,    2, 0x06 /* Public */,
+       1,    0,   54,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    0,   40,    2, 0x08 /* Private */,
-       4,    0,   41,    2, 0x08 /* Private */,
-       5,    1,   42,    2, 0x08 /* Private */,
-       7,    1,   45,    2, 0x08 /* Private */,
+       3,    0,   55,    2, 0x08 /* Private */,
+       4,    0,   56,    2, 0x08 /* Private */,
+       5,    1,   57,    2, 0x08 /* Private */,
+       7,    1,   60,    2, 0x08 /* Private */,
+       8,    0,   63,    2, 0x08 /* Private */,
+       9,    1,   64,    2, 0x08 /* Private */,
+      10,    0,   67,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -78,6 +87,9 @@ static const uint qt_meta_data_View__MyView[] = {
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 6,    2,
     QMetaType::Void, QMetaType::Int,    2,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,    2,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -93,6 +105,9 @@ void View::MyView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 2: _t->onActionSignal(); break;
         case 3: _t->onSignalCurRunModel((*reinterpret_cast< std::string(*)>(_a[1]))); break;
         case 4: _t->onListWidgetCamerasItemPressed((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 5: _t->onButtonToLoadOrderNumber(); break;
+        case 6: _t->onComboBoxLoadOrderNumberUsers((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 7: _t->onButtonToLoadUser(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -136,13 +151,13 @@ int View::MyView::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 8)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 5;
+        _id -= 8;
     }
     return _id;
 }

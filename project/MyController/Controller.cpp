@@ -257,6 +257,124 @@ namespace Controller {
 		return{};
 	}
 
+	bool DomainController::tryToLoadTargetOrder(std::string orderNumber) {
+		try
+		{
+			int colNum = mDataBase->findColNumsFromTargetTable("order_info");
+			std::vector<std::vector<std::string>> mTable =
+				mDataBase->queryAllData("order_info", colNum, "order_number", orderNumber, "id", true);
+			if (mTable.size() == 0) {	// 验证账户id
+				std::cout << "无此订单编号" << std::endl;
+				return false;
+			}
+		}
+		catch (const std::exception &e)
+		{
+			std::cout << "DomainController::tryToLoadTargetOrder()->" << e.what() << std::endl;
+			return false;
+		}
+		return true;
+	}
+
+	bool DomainController::tryCreateNewOrder(std::string orderNumber, std::string createTime, std::string orderQuantity) {
+		try
+		{
+			int hasRows = mDataBase->findRowNumsFromTargetTable("order_info");
+
+			std::vector<std::string> newOrderRow;
+			newOrderRow.push_back(std::to_string(hasRows));
+			newOrderRow.push_back(orderNumber);
+			newOrderRow.push_back(createTime);
+			newOrderRow.push_back(orderQuantity);
+			newOrderRow.push_back("0");
+			newOrderRow.push_back("0");
+			newOrderRow.push_back("0");
+
+			mDataBase->insertSingleRowData("order_info", newOrderRow);
+		}
+		catch (const std::exception &e)
+		{
+			std::cout << "DomainController::tryCreateNewOrder()->" << e.what() << std::endl;
+			return false;
+		}
+		return true;
+	}
+
+	std::vector<std::vector<std::string>> DomainController::getUsersMsgSearchByOrderNumber(std::string orderNumber) {
+		try {
+			int colNum = mDataBase->findColNumsFromTargetTable("order_and_user_info");
+			std::vector<std::vector<std::string>> mTable =
+				mDataBase->queryAllData("order_and_user_info", colNum, "order_number", orderNumber, "id", true);
+			std::vector<std::vector<std::string>> tmpInfo;
+
+			if (mTable.size() == 0) {
+				return{};
+			}
+			else {
+				for (int i = 0; i < mTable.size(); ++i) {
+					tmpInfo.push_back({ mTable[i][2], mTable[i][3], mTable[i][4], mTable[i][5], mTable[i][6], mTable[i][7] });
+				}
+			}
+			return tmpInfo;
+		}
+		catch (const std::exception &e)
+		{
+			std::cout << "DomainController::getUsersMsgSearchByOrderNumber()->" << e.what() << std::endl;
+			return{};
+		}
+		return{};
+	}
+
+	bool DomainController::addOrderNewUserTask(std::string orderNumber, std::string newUserID, std::string targetTotalNum) {
+		try
+		{
+			int hasRows = mDataBase->findRowNumsFromTargetTable("order_and_user_info");
+
+			std::vector<std::string> newOrderAndUserRow;
+			newOrderAndUserRow.push_back(std::to_string(hasRows));
+			newOrderAndUserRow.push_back(orderNumber);
+			newOrderAndUserRow.push_back(newUserID);
+			newOrderAndUserRow.push_back(targetTotalNum);
+			newOrderAndUserRow.push_back("0");
+			newOrderAndUserRow.push_back(targetTotalNum);
+			newOrderAndUserRow.push_back("0");
+			newOrderAndUserRow.push_back("0");
+
+			mDataBase->insertSingleRowData("order_and_user_info", newOrderAndUserRow);
+		}
+		catch (const std::exception &e)
+		{
+			std::cout << "DomainController::addOrderNewUserTask()->" << e.what() << std::endl;
+			return false;
+		}
+		return true;
+	}
+
+	std::vector<std::vector<std::string>> DomainController::getOrderMsgSearchByUserID(std::string userID) {
+		try {
+			int colNum = mDataBase->findColNumsFromTargetTable("order_and_user_info");
+			std::vector<std::vector<std::string>> mTable =
+				mDataBase->queryAllData("order_and_user_info", colNum, "user_id", userID, "id", true);
+			std::vector<std::vector<std::string>> tmpInfo;
+
+			if (mTable.size() == 0) {
+				return{};
+			}
+			else {
+				for (int i = 0; i < mTable.size(); ++i) {
+					tmpInfo.push_back({ mTable[i][1], mTable[i][3], mTable[i][4], mTable[i][5], mTable[i][6], mTable[i][7] });
+				}
+			}
+			return tmpInfo;
+		}
+		catch (const std::exception &e)
+		{
+			std::cout << "DomainController::getOrderMsgSearchByUserID()->" << e.what() << std::endl;
+			return{};
+		}
+		return{};
+	}
+
 	std::vector<std::string> DomainController::readAllModelNames() {
 		try
 		{
@@ -640,5 +758,9 @@ namespace Controller {
 
 	void DomainController::setCurrentUser(std::map<std::string, std::string> userInfo) {
 		return mUserCache->setCurrentUser(userInfo);
+	}
+
+	std::map<std::string, std::string> DomainController::getCurrentUser() {
+		return mUserCache->getCurrentUser();
 	}
 }

@@ -1,16 +1,24 @@
-﻿生成启动时间为 2021/12/19 17:43:35。
+﻿生成启动时间为 2021/12/20 16:56:50。
      1>项目“C:\Users\lx\Desktop\毕业设计论文\project\project\project.vcxproj”在节点 2 上(Build 个目标)。
      1>项目“C:\Users\lx\Desktop\毕业设计论文\project\project\project.vcxproj”(1)正在节点 2 上生成“C:\Users\lx\Desktop\毕业设计论文\project\project\project.vcxproj”(1:2) (Build 个目标)。
      1>QtWork:
          uic MyView.ui
+         moc MyView\MyView.h
        ClCompile:
-         D:\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /Ix64\Debug\uic /Ix64\Debug\moc /I"C:\Users\lx\Desktop\??????\project\project\x64\Debug\qmake\temp" /ID:\QT\5.12.3\5.12.3\msvc2015_64\include /ID:\QT\5.12.3\5.12.3\msvc2015_64\include\QtWidgets /ID:\QT\5.12.3\5.12.3\msvc2015_64\include\QtGui /ID:\QT\5.12.3\5.12.3\msvc2015_64\include\QtANGLE /ID:\QT\5.12.3\5.12.3\msvc2015_64\include\QtCore /IC:\VulkanSDK\1.0.51.0\include /I"D:\QT\5.12.3\5.12.3\msvc2015_64\mkspecs\win32-msvc" /Ix64\Debug\moc /Ix64\Debug\uic /Zi /nologo /W1 /WX- /MP /Od /D UNICODE /D _UNICODE /D WIN32 /D _ENABLE_EXTENDED_ALIGNED_STORAGE /D WIN64 /D QT_WIDGETS_LIB /D QT_GUI_LIB /D QT_CORE_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"x64\Debug\\" /Fd"x64\Debug\vc140.pdb" /Gd /TP /errorReport:prompt MyView\LauncherView.cpp MyView\MyView.cpp main.cpp
+         D:\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /Ix64\Debug\uic /Ix64\Debug\moc /I"C:\Users\lx\Desktop\??????\project\project\x64\Debug\qmake\temp" /ID:\QT\5.12.3\5.12.3\msvc2015_64\include /ID:\QT\5.12.3\5.12.3\msvc2015_64\include\QtWidgets /ID:\QT\5.12.3\5.12.3\msvc2015_64\include\QtGui /ID:\QT\5.12.3\5.12.3\msvc2015_64\include\QtANGLE /ID:\QT\5.12.3\5.12.3\msvc2015_64\include\QtCore /IC:\VulkanSDK\1.0.51.0\include /I"D:\QT\5.12.3\5.12.3\msvc2015_64\mkspecs\win32-msvc" /Ix64\Debug\moc /Ix64\Debug\uic /Zi /nologo /W1 /WX- /MP /Od /D UNICODE /D _UNICODE /D WIN32 /D _ENABLE_EXTENDED_ALIGNED_STORAGE /D WIN64 /D QT_WIDGETS_LIB /D QT_GUI_LIB /D QT_CORE_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"x64\Debug\\" /Fd"x64\Debug\vc140.pdb" /Gd /TP /errorReport:prompt MyController\Controller.cpp MyView\ImageSettingView.cpp MyView\LauncherView.cpp MyView\LogInView.cpp MyView\MyView.cpp MyView\RegisterNewUserView.cpp main.cpp
+         Controller.cpp
+         ImageSettingView.cpp
          LauncherView.cpp
+         LogInView.cpp
          MyView.cpp
+         RegisterNewUserView.cpp
          main.cpp
-         D:\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /Ix64\Debug\uic /Ix64\Debug\moc /I"C:\Users\lx\Desktop\毕业设计论文\project\project\\" /I"C:\Users\lx\Desktop\??????\project\project\x64\Debug\qmake\temp" /ID:\QT\5.12.3\5.12.3\msvc2015_64\include /ID:\QT\5.12.3\5.12.3\msvc2015_64\include\QtWidgets /ID:\QT\5.12.3\5.12.3\msvc2015_64\include\QtGui /ID:\QT\5.12.3\5.12.3\msvc2015_64\include\QtANGLE /ID:\QT\5.12.3\5.12.3\msvc2015_64\include\QtCore /IC:\VulkanSDK\1.0.51.0\include /I"D:\QT\5.12.3\5.12.3\msvc2015_64\mkspecs\win32-msvc" /Ix64\Debug\moc /Ix64\Debug\uic /Zi /nologo /W1 /WX- /MP /Od /D UNICODE /D _UNICODE /D WIN32 /D _ENABLE_EXTENDED_ALIGNED_STORAGE /D WIN64 /D QT_WIDGETS_LIB /D QT_GUI_LIB /D QT_CORE_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"x64\Debug\\" /Fd"x64\Debug\vc140.pdb" /Gd /TP /errorReport:prompt x64\Debug\moc\moc_LauncherView.cpp x64\Debug\moc\moc_MyView.cpp
+         D:\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /Ix64\Debug\uic /Ix64\Debug\moc /I"C:\Users\lx\Desktop\毕业设计论文\project\project\\" /I"C:\Users\lx\Desktop\??????\project\project\x64\Debug\qmake\temp" /ID:\QT\5.12.3\5.12.3\msvc2015_64\include /ID:\QT\5.12.3\5.12.3\msvc2015_64\include\QtWidgets /ID:\QT\5.12.3\5.12.3\msvc2015_64\include\QtGui /ID:\QT\5.12.3\5.12.3\msvc2015_64\include\QtANGLE /ID:\QT\5.12.3\5.12.3\msvc2015_64\include\QtCore /IC:\VulkanSDK\1.0.51.0\include /I"D:\QT\5.12.3\5.12.3\msvc2015_64\mkspecs\win32-msvc" /Ix64\Debug\moc /Ix64\Debug\uic /Zi /nologo /W1 /WX- /MP /Od /D UNICODE /D _UNICODE /D WIN32 /D _ENABLE_EXTENDED_ALIGNED_STORAGE /D WIN64 /D QT_WIDGETS_LIB /D QT_GUI_LIB /D QT_CORE_LIB /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"x64\Debug\\" /Fd"x64\Debug\vc140.pdb" /Gd /TP /errorReport:prompt x64\Debug\moc\moc_ImageSettingView.cpp x64\Debug\moc\moc_LauncherView.cpp x64\Debug\moc\moc_LogInView.cpp x64\Debug\moc\moc_MyView.cpp x64\Debug\moc\moc_RegisterNewUserView.cpp
+         moc_ImageSettingView.cpp
          moc_LauncherView.cpp
+         moc_LogInView.cpp
          moc_MyView.cpp
+         moc_RegisterNewUserView.cpp
        Link:
          D:\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\lx\Desktop\毕业设计论文\project\x64\Debug\project.exe" /NOLOGO /LIBPATH:D:\QT\5.12.3\5.12.3\msvc2015_64\lib /LIBPATH:C:\openssl\lib /LIBPATH:"C:\Utils\my_sql\mysql-5.6.11-winx64\lib" /LIBPATH:C:\Utils\postgresql\pgsql\lib opencv_world348d.lib MvCameraControl.lib libmysql.lib D:\QT\5.12.3\5.12.3\msvc2015_64\lib\Qt5Widgetsd.lib D:\QT\5.12.3\5.12.3\msvc2015_64\lib\Qt5Guid.lib D:\QT\5.12.3\5.12.3\msvc2015_64\lib\Qt5Cored.lib D:\QT\5.12.3\5.12.3\msvc2015_64\lib\qtmaind.lib shell32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\lx\Desktop\毕业设计论文\project\x64\Debug\project.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\lx\Desktop\毕业设计论文\project\x64\Debug\project.lib" /MACHINE:X64 x64\Debug\UserCache.obj
          x64\Debug\ImageSettingView.obj
@@ -29,15 +37,15 @@
          x64\Debug\moc_LauncherView.obj
          x64\Debug\moc_LogInView.obj
          x64\Debug\moc_RegisterNewUserView.obj
-         x64\Debug\moc_MyView.obj
          x64\Debug\moc_ImageSettingView.obj
          x64\Debug\moc_QListWidgetCamerasItem.obj
          x64\Debug\moc_QListWidgetErrorItem.obj
          x64\Debug\moc_QLabelWithMouseEvent.obj
+         x64\Debug\moc_MyView.obj
          project.vcxproj -> C:\Users\lx\Desktop\毕业设计论文\project\x64\Debug\project.exe
      1>已完成生成项目“C:\Users\lx\Desktop\毕业设计论文\project\project\project.vcxproj”(Build 个目标)的操作。
      1>已完成生成项目“C:\Users\lx\Desktop\毕业设计论文\project\project\project.vcxproj”(Build 个目标)的操作。
 
 已成功生成。
 
-已用时间 00:00:21.33
+已用时间 00:00:39.30

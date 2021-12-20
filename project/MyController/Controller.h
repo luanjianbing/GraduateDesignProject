@@ -125,6 +125,16 @@ namespace Controller {
 		std::vector<std::vector<std::string>> getUsersFromAuthority(std::string toMatchAuthority);
 		// 查询某个用户的相关信息
 		std::map<std::string, std::string> getTargetUserInfo(std::string userID);
+		// 判断是否有某个订单
+		bool tryToLoadTargetOrder(std::string orderNumber);
+		// 创建新订单
+		bool tryCreateNewOrder(std::string orderNumber, std::string createTime, std::string orderQuantity);
+		// 根据订单编号查询这个订单安排的用户情况
+		std::vector<std::vector<std::string>> getUsersMsgSearchByOrderNumber(std::string orderNumber);
+		// 添加订单任务安排
+		bool addOrderNewUserTask(std::string orderNumber, std::string newUserID, std::string targetTotalNum);
+		// 根据用户ID查询这个用户的任务安排情况
+		std::vector<std::vector<std::string>> getOrderMsgSearchByUserID(std::string userID);
 
 		// model_name表
 		std::vector<std::string> readAllModelNames();	// 读取已经存取的model模型名称
@@ -149,7 +159,7 @@ namespace Controller {
 		// UserCacheController实现函数
 		std::vector<std::string> getUserAuthorities();
 		void setCurrentUser(std::map<std::string, std::string> userInfo);
-
+		std::map<std::string, std::string> getCurrentUser();
 
 		// 下面是算法测试函数
 		// 建立模型时调用

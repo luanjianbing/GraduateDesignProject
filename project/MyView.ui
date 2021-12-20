@@ -98,8 +98,21 @@
           <layout class="QGridLayout" name="gridLayout_13" rowstretch="5,5" columnstretch="5,5">
            <item row="0" column="0">
             <widget class="QWidget" name="widget" native="true">
-             <layout class="QGridLayout" name="gridLayout_6" columnstretch="1,6,1">
+             <layout class="QGridLayout" name="gridLayout_6" columnstretch="9,1">
               <item row="0" column="1">
+               <spacer name="horizontalSpacer_2">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="0" column="0">
                <widget class="QLabel" name="label_7">
                 <property name="font">
                  <font>
@@ -133,32 +146,6 @@
                 </property>
                </widget>
               </item>
-              <item row="0" column="0">
-               <spacer name="horizontalSpacer">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="0" column="2">
-               <spacer name="horizontalSpacer_2">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
              </layout>
             </widget>
            </item>
@@ -173,6 +160,9 @@
              <layout class="QGridLayout" name="gridLayout_5">
               <item row="0" column="0">
                <widget class="QLabel" name="label">
+                <property name="frameShape">
+                 <enum>QFrame::WinPanel</enum>
+                </property>
                 <property name="text">
                  <string>用户名：</string>
                 </property>
@@ -183,13 +173,22 @@
               </item>
               <item row="0" column="1">
                <widget class="QLabel" name="labelUserID">
+                <property name="frameShape">
+                 <enum>QFrame::NoFrame</enum>
+                </property>
                 <property name="text">
                  <string>u</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
                 </property>
                </widget>
               </item>
               <item row="1" column="0">
                <widget class="QLabel" name="label_2">
+                <property name="frameShape">
+                 <enum>QFrame::WinPanel</enum>
+                </property>
                 <property name="text">
                  <string>姓名：</string>
                 </property>
@@ -200,10 +199,16 @@
                 <property name="text">
                  <string>/</string>
                 </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
                </widget>
               </item>
               <item row="2" column="0">
                <widget class="QLabel" name="label_3">
+                <property name="frameShape">
+                 <enum>QFrame::WinPanel</enum>
+                </property>
                 <property name="text">
                  <string>生产线：</string>
                 </property>
@@ -214,10 +219,16 @@
                 <property name="text">
                  <string>/</string>
                 </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
                </widget>
               </item>
               <item row="3" column="0">
                <widget class="QLabel" name="label_10">
+                <property name="frameShape">
+                 <enum>QFrame::WinPanel</enum>
+                </property>
                 <property name="text">
                  <string>登陆时间：</string>
                 </property>
@@ -227,6 +238,9 @@
                <widget class="QLabel" name="labelOnlineStartTime">
                 <property name="text">
                  <string>/</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
                 </property>
                </widget>
               </item>
@@ -238,6 +252,9 @@
              <layout class="QGridLayout" name="gridLayout_7">
               <item row="1" column="2">
                <widget class="QLabel" name="label_16">
+                <property name="frameShape">
+                 <enum>QFrame::WinPanel</enum>
+                </property>
                 <property name="text">
                  <string>累计已完成数量：</string>
                 </property>
@@ -245,6 +262,9 @@
               </item>
               <item row="2" column="0">
                <widget class="QLabel" name="label_17">
+                <property name="frameShape">
+                 <enum>QFrame::WinPanel</enum>
+                </property>
                 <property name="text">
                  <string>累计合格数量：</string>
                 </property>
@@ -252,6 +272,9 @@
               </item>
               <item row="4" column="0">
                <widget class="QLabel" name="label_14">
+                <property name="frameShape">
+                 <enum>QFrame::WinPanel</enum>
+                </property>
                 <property name="text">
                  <string>本次合格数量：</string>
                 </property>
@@ -262,12 +285,18 @@
                 <property name="text">
                  <string>/</string>
                 </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
                </widget>
               </item>
               <item row="2" column="1">
                <widget class="QLabel" name="labelAlreadyOKQuantity">
                 <property name="text">
                  <string>/</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
                 </property>
                </widget>
               </item>
@@ -276,10 +305,16 @@
                 <property name="text">
                  <string>/</string>
                 </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
                </widget>
               </item>
               <item row="1" column="0">
                <widget class="QLabel" name="label_9">
+                <property name="frameShape">
+                 <enum>QFrame::WinPanel</enum>
+                </property>
                 <property name="text">
                  <string>订单数量：</string>
                 </property>
@@ -290,10 +325,16 @@
                 <property name="text">
                  <string>/</string>
                 </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
                </widget>
               </item>
               <item row="0" column="2">
                <widget class="QLabel" name="label_13">
+                <property name="frameShape">
+                 <enum>QFrame::WinPanel</enum>
+                </property>
                 <property name="text">
                  <string>订单创建时间：</string>
                 </property>
@@ -301,6 +342,9 @@
               </item>
               <item row="4" column="2">
                <widget class="QLabel" name="label_15">
+                <property name="frameShape">
+                 <enum>QFrame::WinPanel</enum>
+                </property>
                 <property name="text">
                  <string>本次不合格数量：</string>
                 </property>
@@ -311,10 +355,16 @@
                 <property name="text">
                  <string>/</string>
                 </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
                </widget>
               </item>
               <item row="3" column="0">
                <widget class="QLabel" name="label_12">
+                <property name="frameShape">
+                 <enum>QFrame::WinPanel</enum>
+                </property>
                 <property name="text">
                  <string>本次完成数量：</string>
                 </property>
@@ -322,6 +372,9 @@
               </item>
               <item row="0" column="0">
                <widget class="QLabel" name="label_8">
+                <property name="frameShape">
+                 <enum>QFrame::WinPanel</enum>
+                </property>
                 <property name="text">
                  <string>订单编号：</string>
                 </property>
@@ -329,6 +382,9 @@
               </item>
               <item row="2" column="2">
                <widget class="QLabel" name="label_18">
+                <property name="frameShape">
+                 <enum>QFrame::WinPanel</enum>
+                </property>
                 <property name="text">
                  <string>累计不合格数量：</string>
                 </property>
@@ -339,12 +395,18 @@
                 <property name="text">
                  <string>/</string>
                 </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
                </widget>
               </item>
               <item row="1" column="3">
                <widget class="QLabel" name="labelAlreadyFinishQuantity">
                 <property name="text">
                  <string>/</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
                 </property>
                </widget>
               </item>
@@ -353,12 +415,18 @@
                 <property name="text">
                  <string>/</string>
                 </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
                </widget>
               </item>
               <item row="4" column="3">
                <widget class="QLabel" name="labelNowNGQuantity">
                 <property name="text">
                  <string>/</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
                 </property>
                </widget>
               </item>
@@ -390,12 +458,12 @@
               </column>
               <column>
                <property name="text">
-                <string>已完成数量</string>
+                <string>总数</string>
                </property>
               </column>
               <column>
                <property name="text">
-                <string>未完成数量</string>
+                <string>已完成数量</string>
                </property>
               </column>
              </widget>
@@ -421,7 +489,11 @@
                 </widget>
                </item>
                <item row="1" column="1" colspan="2">
-                <widget class="QLineEdit" name="lineEditLoadOrderNumberUserTargetQuantity"/>
+                <widget class="QLineEdit" name="lineEditLoadOrderNumberUserTargetQuantity">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                </widget>
                </item>
                <item row="2" column="0">
                 <widget class="QLabel" name="label_21">
@@ -432,6 +504,9 @@
                </item>
                <item row="2" column="1" colspan="2">
                 <widget class="QLineEdit" name="lineEditLoadOrderNumberUserTargetUnFinishQuantity">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
                  <property name="text">
                   <string/>
                  </property>
@@ -453,17 +528,15 @@
                <item row="3" column="2">
                 <widget class="QPushButton" name="buttonSureInLoadOrderNumber">
                  <property name="text">
-                  <string>确认修改</string>
+                  <string>确认信息</string>
                  </property>
                 </widget>
                </item>
                <item row="0" column="1" colspan="2">
                 <widget class="QComboBox" name="comboBoxLoadOrderNumberUsers">
-                 <item>
-                  <property name="text">
-                   <string>(add new user)</string>
-                  </property>
-                 </item>
+                 <property name="currentIndex">
+                  <number>-1</number>
+                 </property>
                 </widget>
                </item>
               </layout>
@@ -507,12 +580,12 @@
               </column>
               <column>
                <property name="text">
-                <string>已完成数量</string>
+                <string>总数</string>
                </property>
               </column>
               <column>
                <property name="text">
-                <string>未完成数量</string>
+                <string>已完成数量</string>
                </property>
               </column>
              </widget>
@@ -532,11 +605,12 @@
                </item>
                <item row="0" column="1" colspan="2">
                 <widget class="QComboBox" name="comboBoxLoadUserOrderNumbers">
-                 <item>
-                  <property name="text">
-                   <string>(add new order)</string>
-                  </property>
-                 </item>
+                 <property name="currentText">
+                  <string/>
+                 </property>
+                 <property name="currentIndex">
+                  <number>-1</number>
+                 </property>
                 </widget>
                </item>
                <item row="1" column="0">
@@ -547,7 +621,11 @@
                 </widget>
                </item>
                <item row="1" column="1" colspan="2">
-                <widget class="QLineEdit" name="lineEditLoadUserOrderNumberTargetQuantity"/>
+                <widget class="QLineEdit" name="lineEditLoadUserOrderNumberTargetQuantity">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                </widget>
                </item>
                <item row="2" column="0">
                 <widget class="QLabel" name="label_19">
@@ -558,6 +636,9 @@
                </item>
                <item row="2" column="1" colspan="2">
                 <widget class="QLineEdit" name="lineEditLoadUserOrderNumberTargetUnFinishQuantity">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
                  <property name="text">
                   <string/>
                  </property>
@@ -578,8 +659,11 @@
                </item>
                <item row="3" column="2">
                 <widget class="QPushButton" name="buttonSureInLoadUser">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
                  <property name="text">
-                  <string>确认修改</string>
+                  <string>确认信息</string>
                  </property>
                 </widget>
                </item>

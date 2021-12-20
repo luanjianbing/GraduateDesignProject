@@ -14,6 +14,8 @@ namespace View {
 		if (mCamerasNum > 0) {
 			// 初始化根据相机数量初始化的ListWidgetCameras
 			initListWidgetCameras();
+			// 初始化订单管理相关数据
+			initOrderMsg();
 		}
 	}
 
@@ -261,5 +263,244 @@ namespace View {
 	{
 		// 在退出窗口之前，发送信号显示
 		emit signalClose();
+	}
+
+	void MyView::initOrderMsg() {
+		// 初始化使用人员信息
+		initUserMsg();
+
+		// 加载订单
+		connect(ui.buttonToLoadOrderNumber, SIGNAL(released()), this, SLOT(onButtonToLoadOrderNumber()));
+
+		// 加载用户
+		connect(ui.buttonToLoadUser, SIGNAL(released()), this, SLOT(onButtonToLoadUser()));
+	}
+
+	void MyView::initUserMsg() {
+		// 获取UserCache里面的相关信息并显示到界面上
+		mCurrentUser.clear();
+		mCurrentUser = Controller::DomainController::getInstance()->getCurrentUser();
+		// 显示
+		try {
+			ui.labelUserID->setText(QString::fromStdString(mCurrentUser["userID"]));
+			ui.labelTrueName->setText(QString::fromStdString(mCurrentUser["userTrueName"]));
+			ui.labelProductionLine->setText(QString::fromStdString(mCurrentUser["userProductionLine"]));
+
+			QDateTime currentDateTime = QDateTime::currentDateTime();
+			QString currentDateTimeStr = currentDateTime.toString("yyyy.MM.dd hh:mm:ss");
+			ui.labelOnlineStartTime->setText(currentDateTimeStr);
+		}
+		catch (std::exception &e){
+			QMessageBox::warning(NULL, QStringLiteral("警告"), QStringLiteral("获取用户Cache信息错误"), QMessageBox::Yes);
+		}
+		
+	}
+
+	void MyView::onButtonToLoadOrderNumber() {
+		// 检查是否有这个订单
+		std::string tmpTargetOrderNumber = ui.lineEditToLoadOrderNumber->text().toStdString();
+		bool isFindTargetOrderNumber = Controller::DomainController::getInstance()->tryToLoadTargetOrder(tmpTargetOrderNumber);
+		if (isFindTargetOrderNumber) {	// 存在这个订单，加载相关信息，包括实时显示tab的相关信息
+			updateOrderMsgSearchByOrderNumber(tmpTargetOrderNumber);
+		}
+		else {
+			// 只有权限级别为TechnicalStaff以上才可以添加用户
+			bool canAddNewOrder = Controller::DomainController::getInstance()->checkAuthority("CommonStaff", mCurrentUser["userID"]);	// 检查权限
+			if (canAddNewOrder) {	// 可以添加订单，技术人员以上
+				// 是否添加此订单
+				QMessageBox::StandardButton result = 
+					QMessageBox::question(NULL, QStringLiteral("提示"), QStringLiteral("查无此订单，是否添加"), QMessageBox::Yes | QMessageBox::No);
+				if (result == QMessageBox::Yes)	// 添加当前订单
+				{
+					// 输入需要添加的当前订单数量
+					bool getTargetOrderNumber = false;
+					QString targetOrderQuantity = QInputDialog::getText(this, QStringLiteral("提示"),
+						QStringLiteral("请输入该订单产品数量"), QLineEdit::Normal,
+						"", &getTargetOrderNumber);
+					if (getTargetOrderNumber && !targetOrderQuantity.isEmpty()) {
+						// 在数据库中创建
+						QDateTime currentDateTime = QDateTime::currentDateTime();
+						QString currentDateTimeStr = currentDateTime.toString("yyyy.MM.dd hh:mm:ss");
+						bool tryCreateNewOrder = Controller::DomainController::getInstance()->tryCreateNewOrder(tmpTargetOrderNumber, currentDateTimeStr.toStdString(), targetOrderQuantity.toStdString());
+
+						if (tryCreateNewOrder) {
+							std::cout << "创建新订单成功" << std::endl;
+							QMessageBox::information(NULL, QStringLiteral("提示"), QStringLiteral("创建新订单成功"), QMessageBox::Yes);
+							// 查询显示相关信息
+							updateOrderMsgSearchByOrderNumber(tmpTargetOrderNumber);
+						}
+						else {
+							std::cout << "创建新订单失败" << std::endl;
+							QMessageBox::warning(NULL, QStringLiteral("警告"), QStringLiteral("创建新订单失败"), QMessageBox::Yes);
+						}
+					}
+					else {
+						std::cout << "取消创建订单" << std::endl;
+						QMessageBox::warning(NULL, QStringLiteral("警告"), QStringLiteral("取消创建该订单"), QMessageBox::Yes);
+					}
+				}
+			}
+			else {	// 普通员工
+				QMessageBox::warning(NULL, QStringLiteral("警告"), QStringLiteral("查无此订单"), QMessageBox::Yes);
+			}
+		}
+	}
+
+	void MyView::updateOrderMsgSearchByOrderNumber(std::string orderNumber) {
+		// 根据orderNumber查询数据
+		mCurrentOrderNumber = orderNumber;
+		mCurrentMsgSearchByOrderNum.clear();
+		mCurrentMsgSearchByOrderNum = Controller::DomainController::getInstance()->getUsersMsgSearchByOrderNumber(orderNumber);
+		// 更新显示
+		ui.treeWidgetOrderNumberToUser->clear();
+		ui.treeWidgetOrderNumberToUser->setColumnCount(3); //设置列数
+		QStringList tmpHeaderList;
+		tmpHeaderList << QStringLiteral("订单编号-用户名") << QStringLiteral("总数") << QStringLiteral("已完成数量");
+		ui.treeWidgetOrderNumberToUser->setHeaderLabels(tmpHeaderList); //设置标题头
+
+		QStringList orderNumberItemList;
+		orderNumberItemList << QString::fromStdString(orderNumber);
+		int orderTotalNum = 0, orderHaveFinishNum = 0;
+		for (int i = 0; i < mCurrentMsgSearchByOrderNum.size(); ++i) {
+			orderTotalNum += atoi(mCurrentMsgSearchByOrderNum[0][1].c_str());
+			orderHaveFinishNum += atoi(mCurrentMsgSearchByOrderNum[0][2].c_str());
+		}
+		orderNumberItemList << QString::fromStdString(std::to_string(orderTotalNum)) << QString::fromStdString(std::to_string(orderHaveFinishNum));
+
+		QTreeWidgetItem *tmpOrderNumberTreeWidgetItem =
+			new QTreeWidgetItem(ui.treeWidgetOrderNumberToUser, QStringList(orderNumberItemList));
+		for (int i = 0; i < mCurrentMsgSearchByOrderNum.size(); ++i) {
+			QStringList tmpUserItemList;
+			tmpUserItemList << QString::fromStdString(mCurrentMsgSearchByOrderNum[i][0]) 
+				<< QString::fromStdString(mCurrentMsgSearchByOrderNum[i][1]) 
+				<< QString::fromStdString(mCurrentMsgSearchByOrderNum[i][2]);
+			QTreeWidgetItem *tmpUserTreeWidgetItem =
+				new QTreeWidgetItem(tmpOrderNumberTreeWidgetItem, QStringList(tmpUserItemList));
+
+			tmpOrderNumberTreeWidgetItem->addChild(tmpUserTreeWidgetItem);
+		}
+		ui.treeWidgetOrderNumberToUser->addTopLevelItem(tmpOrderNumberTreeWidgetItem);
+		ui.treeWidgetOrderNumberToUser->expandAll();
+
+		// 添加进combox中
+		disconnect(ui.comboBoxLoadOrderNumberUsers, SIGNAL(currentIndexChanged(int)), this, SLOT(onComboBoxLoadOrderNumberUsers(int)));
+		ui.comboBoxLoadOrderNumberUsers->clear();
+		for (int i = 0; i < mCurrentMsgSearchByOrderNum.size(); ++i) {
+			ui.comboBoxLoadOrderNumberUsers->addItem(QString::fromStdString(mCurrentMsgSearchByOrderNum[i][0]));
+		}
+		// 最后总是添加一个用于对当前订单添加新用户的item
+		ui.comboBoxLoadOrderNumberUsers->addItem("...");
+		ui.comboBoxLoadOrderNumberUsers->setCurrentIndex(-1);
+		connect(ui.comboBoxLoadOrderNumberUsers, SIGNAL(currentIndexChanged(int)), this, SLOT(onComboBoxLoadOrderNumberUsers(int)));
+	}
+
+	void MyView::onComboBoxLoadOrderNumberUsers(int idx) {
+		if (idx != -1) {
+			if (ui.comboBoxLoadOrderNumberUsers->count() == idx + 1) {	// 说明是最后一个，针对当前添加新用户
+				// 只有权限级别为TechnicalStaff以上才可以添加用户
+				bool canAddNewUser = Controller::DomainController::getInstance()->checkAuthority("CommonStaff", mCurrentUser["userID"]);	// 检查权限
+				if (canAddNewUser) {	// 添加用户
+					bool getTargetNewUser = false;
+					QString targetNewUserID = QInputDialog::getText(this, QStringLiteral("提示"),
+						QStringLiteral("请输入该订单产品任务分配用户ID"), QLineEdit::Normal,
+						"", &getTargetNewUser);
+					if (getTargetNewUser && !targetNewUserID.isEmpty()) {
+						// 测试是否存在此用户
+						if (Controller::DomainController::getInstance()->checkUserIsNewOne(targetNewUserID.toStdString())) {
+							QMessageBox::warning(NULL, QStringLiteral("警告"), QStringLiteral("查无此User ID"), QMessageBox::Yes);
+							return;
+						}
+						// 输入分配的任务数量
+						bool getTargetNewUserQuantity = false;
+						QString targetNewUserIDQuantity = QInputDialog::getText(this, QStringLiteral("提示"),
+							QStringLiteral("请输入该订单产品分配该用户ID数量"), QLineEdit::Normal,
+							"", &getTargetNewUserQuantity);
+						if (getTargetNewUserQuantity && !targetNewUserIDQuantity.isEmpty()) {
+							// 获取新用户的id与需要操作的数量
+							bool isSuccessAddTaskForUser = 
+								Controller::DomainController::getInstance()->addOrderNewUserTask(mCurrentOrderNumber, targetNewUserID.toStdString(), targetNewUserIDQuantity.toStdString());
+							if (!isSuccessAddTaskForUser) {
+								QMessageBox::warning(NULL, QStringLiteral("警告"), QStringLiteral("添加该订单任务失败"), QMessageBox::Yes);
+							}
+							else {
+								updateOrderMsgSearchByOrderNumber(mCurrentOrderNumber);
+							}
+						}
+						else {
+							QMessageBox::warning(NULL, QStringLiteral("警告"), QStringLiteral("添加该订单任务失败"), QMessageBox::Yes);
+						}
+					}
+					else {
+						QMessageBox::warning(NULL, QStringLiteral("警告"), QStringLiteral("添加该订单任务失败"), QMessageBox::Yes);
+					}
+				}
+				else {
+					QMessageBox::warning(NULL, QStringLiteral("警告"), QStringLiteral("无添加用户权限"), QMessageBox::Yes);
+				}
+			}
+			else {	// 仅显示一下
+				try {
+					ui.lineEditLoadOrderNumberUserTargetQuantity->setText(QString::fromStdString(mCurrentMsgSearchByOrderNum[idx][1]));
+					ui.lineEditLoadOrderNumberUserTargetUnFinishQuantity->setText(QString::fromStdString(mCurrentMsgSearchByOrderNum[idx][3]));
+				}
+				catch (const std::exception &e) {
+					std::cout << "lineEdit数量显示失败: " << e.what() << std::endl;
+				}
+			}
+		}
+	}
+
+	void MyView::onButtonToLoadUser() {
+		// 检查是否有这个用户
+		std::string tmpTargetUser = ui.lineEditToLoadUser->text().toStdString();
+		bool isFindTargetUser = !Controller::DomainController::getInstance()->checkUserIsNewOne(tmpTargetUser);
+		if (isFindTargetUser) {	// 存在这个用户
+			updateOrderMsgSearchByUserID(tmpTargetUser);
+		}
+		else {
+			QMessageBox::warning(NULL, QStringLiteral("警告"), QStringLiteral("查无此用户"), QMessageBox::Yes);
+		}
+	}
+
+	void MyView::updateOrderMsgSearchByUserID(std::string userID) {
+		// 根据userID查询数据
+		std::string mTempQueryUserID = userID;
+		std::vector<std::vector<std::string>> mQueryMsgSearchByUserID = Controller::DomainController::getInstance()->getOrderMsgSearchByUserID(mTempQueryUserID);
+		// 更新显示
+		ui.treeWidgetUserToOrderNumber->clear();
+		ui.treeWidgetUserToOrderNumber->setColumnCount(3); //设置列数
+		QStringList tmpHeaderList;
+		tmpHeaderList << QStringLiteral("用户名-订单编号") << QStringLiteral("总数") << QStringLiteral("已完成数量");
+		ui.treeWidgetUserToOrderNumber->setHeaderLabels(tmpHeaderList); //设置标题头
+
+		QStringList userItemList;
+		userItemList << QString::fromStdString(userID);
+		int userTotalNum = 0, userHaveFinishNum = 0;
+		for (int i = 0; i < mQueryMsgSearchByUserID.size(); ++i) {
+			userTotalNum += atoi(mQueryMsgSearchByUserID[0][1].c_str());
+			userHaveFinishNum += atoi(mQueryMsgSearchByUserID[0][2].c_str());
+		}
+		userItemList << QString::fromStdString(std::to_string(userTotalNum)) << QString::fromStdString(std::to_string(userHaveFinishNum));
+
+		QTreeWidgetItem *tmpUserIDTreeWidgetItem =
+			new QTreeWidgetItem(ui.treeWidgetUserToOrderNumber, QStringList(userItemList));
+		for (int i = 0; i < mQueryMsgSearchByUserID.size(); ++i) {
+			QStringList tmpOrderItemList;
+			tmpOrderItemList << QString::fromStdString(mQueryMsgSearchByUserID[i][0])
+				<< QString::fromStdString(mQueryMsgSearchByUserID[i][1])
+				<< QString::fromStdString(mQueryMsgSearchByUserID[i][2]);
+			QTreeWidgetItem *tmpOrderTreeWidgetItem =
+				new QTreeWidgetItem(tmpUserIDTreeWidgetItem, QStringList(tmpOrderItemList));
+
+			tmpUserIDTreeWidgetItem->addChild(tmpOrderTreeWidgetItem);
+		}
+		ui.treeWidgetUserToOrderNumber->addTopLevelItem(tmpUserIDTreeWidgetItem);
+		ui.treeWidgetUserToOrderNumber->expandAll();
+
+		// 更新combobox
+		ui.comboBoxLoadUserOrderNumbers->clear();
+		for (int i = 0; i < mQueryMsgSearchByUserID.size(); ++i) {
+			ui.comboBoxLoadUserOrderNumbers->addItem(QString::fromStdString(mQueryMsgSearchByUserID[i][0]));
+		}
 	}
 }

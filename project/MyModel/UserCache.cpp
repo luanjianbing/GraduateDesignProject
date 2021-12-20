@@ -70,8 +70,28 @@ namespace Model {
 			std::cout << "User Authority : " << mCurrentUser.userAuthority << std::endl;
 
 		}
-		catch (std::exception &e) {
-			std::cout << e.what() << std::endl;
+		catch (const std::exception &e) {
+			std::cout << "setCurrentUser: " << e.what() << std::endl;
 		}
+	}
+
+	std::map<std::string, std::string> UserCacheInterface::getCurrentUser() {
+		try
+		{
+			std::map<std::string, std::string> tmpCurrentUserInfo;
+
+			tmpCurrentUserInfo.insert({ "userID", mCurrentUser.userID });
+			tmpCurrentUserInfo.insert({ "userTrueName", mCurrentUser.userTrueName });
+			tmpCurrentUserInfo.insert({ "userProductionLine", mCurrentUser.userProductionLine });
+			tmpCurrentUserInfo.insert({ "userAuthority", mUserAuthorityStr[static_cast<int>(mCurrentUser.userAuthority)] });
+
+			return tmpCurrentUserInfo;
+		}
+		catch (const std::exception &e)
+		{
+			std::cout << "getCurrentUser: " << e.what() << std::endl;
+			return{};
+		}
+		return{};
 	}
 }

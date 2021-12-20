@@ -53,7 +53,7 @@ public:
     QWidget *widget;
     QGridLayout *gridLayout_6;
     QSpacerItem *horizontalSpacer_2;
-    QLabel *label_7;
+    QLabel *labelSingleResultDisplay;
     QGroupBox *groupBox;
     QGridLayout *gridLayout_5;
     QLabel *label;
@@ -71,19 +71,21 @@ public:
     QLabel *label_14;
     QLabel *labelNowOKQuantity;
     QLabel *labelAlreadyOKQuantity;
-    QLabel *labelNowFinishQuantity;
     QLabel *label_9;
     QLabel *labelOrderNumber;
     QLabel *label_13;
     QLabel *label_15;
     QLabel *labelOrderQuantity;
-    QLabel *label_12;
     QLabel *label_8;
     QLabel *label_18;
     QLabel *labelCreateTime;
     QLabel *labelAlreadyFinishQuantity;
     QLabel *labelAlreadyNGQuantity;
     QLabel *labelNowNGQuantity;
+    QLabel *labelNowFinishQuantity;
+    QLabel *label_12;
+    QLabel *label_23;
+    QLabel *labelUserUnFinishQuantity;
     QWidget *tabDataSetting;
     QWidget *widget_3;
     QGridLayout *gridLayout_11;
@@ -220,21 +222,21 @@ public:
 
         gridLayout_6->addItem(horizontalSpacer_2, 0, 1, 1, 1);
 
-        label_7 = new QLabel(widget);
-        label_7->setObjectName(QString::fromUtf8("label_7"));
+        labelSingleResultDisplay = new QLabel(widget);
+        labelSingleResultDisplay->setObjectName(QString::fromUtf8("labelSingleResultDisplay"));
         QFont font1;
         font1.setFamily(QString::fromUtf8("\351\273\221\344\275\223"));
         font1.setPointSize(79);
-        label_7->setFont(font1);
-        label_7->setStyleSheet(QString::fromUtf8("background:#2c2c2c;color:#e6e6e6"));
-        label_7->setFrameShape(QFrame::WinPanel);
-        label_7->setFrameShadow(QFrame::Sunken);
-        label_7->setTextFormat(Qt::AutoText);
-        label_7->setScaledContents(false);
-        label_7->setAlignment(Qt::AlignCenter);
-        label_7->setWordWrap(false);
+        labelSingleResultDisplay->setFont(font1);
+        labelSingleResultDisplay->setStyleSheet(QString::fromUtf8("background:#2c2c2c;color:#e6e6e6"));
+        labelSingleResultDisplay->setFrameShape(QFrame::WinPanel);
+        labelSingleResultDisplay->setFrameShadow(QFrame::Sunken);
+        labelSingleResultDisplay->setTextFormat(Qt::AutoText);
+        labelSingleResultDisplay->setScaledContents(false);
+        labelSingleResultDisplay->setAlignment(Qt::AlignCenter);
+        labelSingleResultDisplay->setWordWrap(false);
 
-        gridLayout_6->addWidget(label_7, 0, 0, 1, 1);
+        gridLayout_6->addWidget(labelSingleResultDisplay, 0, 0, 1, 1);
 
         gridLayout_6->setColumnStretch(0, 9);
         gridLayout_6->setColumnStretch(1, 1);
@@ -337,12 +339,6 @@ public:
 
         gridLayout_7->addWidget(labelAlreadyOKQuantity, 2, 1, 1, 1);
 
-        labelNowFinishQuantity = new QLabel(widget_2);
-        labelNowFinishQuantity->setObjectName(QString::fromUtf8("labelNowFinishQuantity"));
-        labelNowFinishQuantity->setAlignment(Qt::AlignCenter);
-
-        gridLayout_7->addWidget(labelNowFinishQuantity, 3, 1, 1, 1);
-
         label_9 = new QLabel(widget_2);
         label_9->setObjectName(QString::fromUtf8("label_9"));
         label_9->setFrameShape(QFrame::WinPanel);
@@ -372,12 +368,6 @@ public:
         labelOrderQuantity->setAlignment(Qt::AlignCenter);
 
         gridLayout_7->addWidget(labelOrderQuantity, 1, 1, 1, 1);
-
-        label_12 = new QLabel(widget_2);
-        label_12->setObjectName(QString::fromUtf8("label_12"));
-        label_12->setFrameShape(QFrame::WinPanel);
-
-        gridLayout_7->addWidget(label_12, 3, 0, 1, 1);
 
         label_8 = new QLabel(widget_2);
         label_8->setObjectName(QString::fromUtf8("label_8"));
@@ -414,6 +404,30 @@ public:
         labelNowNGQuantity->setAlignment(Qt::AlignCenter);
 
         gridLayout_7->addWidget(labelNowNGQuantity, 4, 3, 1, 1);
+
+        labelNowFinishQuantity = new QLabel(widget_2);
+        labelNowFinishQuantity->setObjectName(QString::fromUtf8("labelNowFinishQuantity"));
+        labelNowFinishQuantity->setAlignment(Qt::AlignCenter);
+
+        gridLayout_7->addWidget(labelNowFinishQuantity, 3, 3, 1, 1);
+
+        label_12 = new QLabel(widget_2);
+        label_12->setObjectName(QString::fromUtf8("label_12"));
+        label_12->setFrameShape(QFrame::WinPanel);
+
+        gridLayout_7->addWidget(label_12, 3, 2, 1, 1);
+
+        label_23 = new QLabel(widget_2);
+        label_23->setObjectName(QString::fromUtf8("label_23"));
+        label_23->setFrameShape(QFrame::WinPanel);
+
+        gridLayout_7->addWidget(label_23, 3, 0, 1, 1);
+
+        labelUserUnFinishQuantity = new QLabel(widget_2);
+        labelUserUnFinishQuantity->setObjectName(QString::fromUtf8("labelUserUnFinishQuantity"));
+        labelUserUnFinishQuantity->setAlignment(Qt::AlignCenter);
+
+        gridLayout_7->addWidget(labelUserUnFinishQuantity, 3, 1, 1, 1);
 
 
         gridLayout_13->addWidget(widget_2, 1, 0, 1, 2);
@@ -661,7 +675,7 @@ public:
         groupBoxCamera->setTitle(QApplication::translate("projectClass", "\347\233\270\346\234\272", nullptr));
         labelCameraDisplay->setText(QString());
         groupBoxData->setTitle(QApplication::translate("projectClass", "\344\277\241\346\201\257\346\225\260\346\215\256", nullptr));
-        label_7->setText(QApplication::translate("projectClass", "OK", nullptr));
+        labelSingleResultDisplay->setText(QApplication::translate("projectClass", "OK", nullptr));
         groupBox->setTitle(QApplication::translate("projectClass", "\344\275\277\347\224\250\344\272\272\345\221\230\344\277\241\346\201\257", nullptr));
         label->setText(QApplication::translate("projectClass", "\347\224\250\346\210\267\345\220\215\357\274\232", nullptr));
         labelUserID->setText(QApplication::translate("projectClass", "u", nullptr));
@@ -673,22 +687,24 @@ public:
         labelOnlineStartTime->setText(QApplication::translate("projectClass", "/", nullptr));
         label_16->setText(QApplication::translate("projectClass", "\347\264\257\350\256\241\345\267\262\345\256\214\346\210\220\346\225\260\351\207\217\357\274\232", nullptr));
         label_17->setText(QApplication::translate("projectClass", "\347\264\257\350\256\241\345\220\210\346\240\274\346\225\260\351\207\217\357\274\232", nullptr));
-        label_14->setText(QApplication::translate("projectClass", "\346\234\254\346\254\241\345\220\210\346\240\274\346\225\260\351\207\217\357\274\232", nullptr));
+        label_14->setText(QApplication::translate("projectClass", "\345\220\210\346\240\274\346\225\260\351\207\217\357\274\232", nullptr));
         labelNowOKQuantity->setText(QApplication::translate("projectClass", "/", nullptr));
         labelAlreadyOKQuantity->setText(QApplication::translate("projectClass", "/", nullptr));
-        labelNowFinishQuantity->setText(QApplication::translate("projectClass", "/", nullptr));
         label_9->setText(QApplication::translate("projectClass", "\350\256\242\345\215\225\346\225\260\351\207\217\357\274\232", nullptr));
         labelOrderNumber->setText(QApplication::translate("projectClass", "/", nullptr));
         label_13->setText(QApplication::translate("projectClass", "\350\256\242\345\215\225\345\210\233\345\273\272\346\227\266\351\227\264\357\274\232", nullptr));
-        label_15->setText(QApplication::translate("projectClass", "\346\234\254\346\254\241\344\270\215\345\220\210\346\240\274\346\225\260\351\207\217\357\274\232", nullptr));
+        label_15->setText(QApplication::translate("projectClass", "\344\270\215\345\220\210\346\240\274\346\225\260\351\207\217\357\274\232", nullptr));
         labelOrderQuantity->setText(QApplication::translate("projectClass", "/", nullptr));
-        label_12->setText(QApplication::translate("projectClass", "\346\234\254\346\254\241\345\256\214\346\210\220\346\225\260\351\207\217\357\274\232", nullptr));
         label_8->setText(QApplication::translate("projectClass", "\350\256\242\345\215\225\347\274\226\345\217\267\357\274\232", nullptr));
         label_18->setText(QApplication::translate("projectClass", "\347\264\257\350\256\241\344\270\215\345\220\210\346\240\274\346\225\260\351\207\217\357\274\232", nullptr));
         labelCreateTime->setText(QApplication::translate("projectClass", "/", nullptr));
         labelAlreadyFinishQuantity->setText(QApplication::translate("projectClass", "/", nullptr));
         labelAlreadyNGQuantity->setText(QApplication::translate("projectClass", "/", nullptr));
         labelNowNGQuantity->setText(QApplication::translate("projectClass", "/", nullptr));
+        labelNowFinishQuantity->setText(QApplication::translate("projectClass", "/", nullptr));
+        label_12->setText(QApplication::translate("projectClass", "\345\267\262\345\256\214\346\210\220\346\225\260\351\207\217\357\274\232", nullptr));
+        label_23->setText(QApplication::translate("projectClass", "\344\273\273\345\212\241\345\211\251\344\275\231\346\225\260\351\207\217\357\274\232", nullptr));
+        labelUserUnFinishQuantity->setText(QApplication::translate("projectClass", "/", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tabRealTimeStatistics), QApplication::translate("projectClass", "\345\256\236\346\227\266\347\273\237\350\256\241", nullptr));
         QTreeWidgetItem *___qtreewidgetitem = treeWidgetOrderNumberToUser->headerItem();
         ___qtreewidgetitem->setText(2, QApplication::translate("projectClass", "\345\267\262\345\256\214\346\210\220\346\225\260\351\207\217", nullptr));

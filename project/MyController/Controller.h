@@ -135,6 +135,8 @@ namespace Controller {
 		bool addOrderNewUserTask(std::string orderNumber, std::string newUserID, std::string targetTotalNum);
 		// 根据用户ID查询这个用户的任务安排情况
 		std::vector<std::vector<std::string>> getOrderMsgSearchByUserID(std::string userID);
+		// 根据订单ID查看这个订单的情况
+		std::vector<std::string> getTargetOrderMsg(std::string orderNumber);
 
 		// model_name表
 		std::vector<std::string> readAllModelNames();	// 读取已经存取的model模型名称

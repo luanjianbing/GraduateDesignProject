@@ -43,10 +43,49 @@ namespace View {
 
 			// 更新显示相关
 			updateDisplay();
+			// 更新数据相关
+			updateOrderRelateMsgToDataBase();
 		}
 		else {
 			QMessageBox::warning(NULL, QStringLiteral("警告"), QStringLiteral("请先设置模型！"), QMessageBox::Yes);
 		}
+	}
+
+	void MyView::updateOrderRelateMsgDisplay() {
+		// 先更新显示，再入库
+		mCurrentOrderMsg[3] = std::to_string(atoi(mCurrentOrderMsg[3].c_str()) + 1);	// 总数
+
+		mCurrentUserTargetOrderMsg[2] = std::to_string(atoi(mCurrentUserTargetOrderMsg[2].c_str()) + 1);
+		mCurrentUserTargetOrderMsg[3] = std::to_string(atoi(mCurrentUserTargetOrderMsg[3].c_str()) - 1);
+
+		bool isOK = true;
+		for (int i = 0; i < singleProcessResult.size(); ++i) {
+			if (!singleProcessResult[i]) {
+				isOK = false;
+				break;
+			}
+		}
+
+		if (isOK) {
+			mCurrentOrderMsg[4] = std::to_string(atoi(mCurrentOrderMsg[4].c_str()) + 1);	// 合格次数
+
+			mCurrentUserTargetOrderMsg[4] = std::to_string(atoi(mCurrentUserTargetOrderMsg[4].c_str()) + 1);
+
+			ui.labelSingleResultDisplay->setText("OK");
+		}
+		else {
+			mCurrentOrderMsg[5] = std::to_string(atoi(mCurrentOrderMsg[5].c_str()) + 1);	// 不合格次数
+
+			mCurrentUserTargetOrderMsg[5] = std::to_string(atoi(mCurrentUserTargetOrderMsg[5].c_str()) + 1);
+
+			ui.labelSingleResultDisplay->setText("NG");
+		}
+
+		updateToRunDisplayMsg();
+	}
+
+	void MyView::updateOrderRelateMsgToDataBase() {
+		// (TODO)更新后的数据入库，这边暂时先不弄，因为感觉表的参数还是有点模糊
 	}
 
 	void MyView::updateDisplay() {
@@ -54,6 +93,8 @@ namespace View {
 		updateErrorItemDisplay();
 		// 更新图像显示（保证画Block在最后一个动作，不影响其他显示）
 		updateProcessBlockResult();
+		// 统计数据更新
+		updateOrderRelateMsgDisplay();
 	}
 
 	void MyView::updateProcessBlockResult() {
@@ -274,6 +315,72 @@ namespace View {
 
 		// 加载用户
 		connect(ui.buttonToLoadUser, SIGNAL(released()), this, SLOT(onButtonToLoadUser()));
+
+		connect(ui.buttonSureInLoadOrderNumber, SIGNAL(released()), this, SLOT(onButtonSureInLoadOrderNumber()));
+	}
+
+	void MyView::onButtonSureInLoadOrderNumber() {
+		if (mCurrentOrderNumber != "") {
+			// 先检查当前用户是否有这个订单的需求
+			std::string mTempQueryUserID = mCurrentUser["userID"];
+			std::vector<std::vector<std::string>> mQueryMsgSearchByUserID = Controller::DomainController::getInstance()->getOrderMsgSearchByUserID(mTempQueryUserID);
+			
+			int targetOrderNumberIndex = -1;
+			for (int i = 0; i < mQueryMsgSearchByUserID.size(); ++i) {
+				std::string tmpOrderNum = mQueryMsgSearchByUserID[i][0];
+				if (tmpOrderNum == mCurrentOrderNumber) {
+					targetOrderNumberIndex = i;
+					break;
+				}
+			}
+
+			if (targetOrderNumberIndex != -1) {	// 有这个任务
+				// 记录当前这个User的这个Order的相关数据信息
+				mCurrentUserTargetOrderMsg.clear();
+				for (int j = 0; j < mQueryMsgSearchByUserID[targetOrderNumberIndex].size(); ++j) {
+					mCurrentUserTargetOrderMsg.push_back(mQueryMsgSearchByUserID[targetOrderNumberIndex][j]);
+				}
+				// 去调取这个Order的整体信息
+				mCurrentOrderMsg.clear();
+				mCurrentOrderMsg = Controller::DomainController::getInstance()->getTargetOrderMsg(mCurrentOrderNumber);
+				// 更新界面显示
+				updateToRunDisplayMsg();
+				QMessageBox::information(NULL, QStringLiteral("提示"), QStringLiteral("订单任务信息加载完毕"), QMessageBox::Yes);
+				ui.tabWidget->setCurrentIndex(0);
+			}
+			else {		// 这个userid没有这个ordernumber的任务
+				QMessageBox::warning(NULL, QStringLiteral("警告"), QStringLiteral("当前UserID，无此订单任务，请联系管理员添加"), QMessageBox::Yes);
+			}
+
+		}
+		else {
+			QMessageBox::warning(NULL, QStringLiteral("警告"), QStringLiteral("未加载对应订单编号信息"), QMessageBox::Yes);
+		}
+	}
+
+	void MyView::updateToRunDisplayMsg() {
+		// 订单相关的信息显示
+		try {
+			ui.labelOrderNumber->setText(QString::fromStdString(mCurrentOrderMsg[0]));
+			ui.labelCreateTime->setText(QString::fromStdString(mCurrentOrderMsg[1]));
+			ui.labelOrderQuantity->setText(QString::fromStdString(mCurrentOrderMsg[2]));
+			ui.labelAlreadyFinishQuantity->setText(QString::fromStdString(mCurrentOrderMsg[3]));
+			ui.labelAlreadyOKQuantity->setText(QString::fromStdString(mCurrentOrderMsg[4]));
+			ui.labelAlreadyNGQuantity->setText(QString::fromStdString(mCurrentOrderMsg[5]));
+		}
+		catch (const std::exception &e) {
+			std::cout << "订单信息加载显示错误: " << e.what() << std::endl;
+		}
+		// 当前任务
+		try {
+			ui.labelUserUnFinishQuantity->setText(QString::fromStdString(mCurrentUserTargetOrderMsg[3]));
+			ui.labelNowFinishQuantity->setText(QString::fromStdString(mCurrentUserTargetOrderMsg[2]));
+			ui.labelNowOKQuantity->setText(QString::fromStdString(mCurrentUserTargetOrderMsg[4]));
+			ui.labelNowNGQuantity->setText(QString::fromStdString(mCurrentUserTargetOrderMsg[5]));
+		}
+		catch (const std::exception &e) {
+			std::cout << "任务信息显示错误: " << e.what() << std::endl;
+		}
 	}
 
 	void MyView::initUserMsg() {

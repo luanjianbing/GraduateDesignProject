@@ -61,7 +61,9 @@ namespace View {
 			// 订单管理相关
 			std::map<std::string, std::string> mCurrentUser;
 			std::string mCurrentOrderNumber = "";
-			std::vector<std::vector<std::string>> mCurrentMsgSearchByOrderNum;
+			std::vector<std::vector<std::string>> mCurrentMsgSearchByOrderNum;	// 查询order_and_user_info这个信息
+			std::vector<std::string> mCurrentUserTargetOrderMsg;	// 查询的order_and_user_info这张表的信息
+			std::vector<std::string> mCurrentOrderMsg;	// 查询的order_info这个信息
 
 		private:
 			// 初始化根据模型名称获取的数据
@@ -84,6 +86,12 @@ namespace View {
 			void updateOrderMsgSearchByOrderNumber(std::string orderNumber);
 			// 根据用户编号查询订单相关信息
 			void updateOrderMsgSearchByUserID(std::string userID);
+			// 更新界面相关信息
+			void updateToRunDisplayMsg();
+			// 更新结果数据相关变化入库
+			void updateOrderRelateMsgToDataBase();
+			// 更新结果数据界面显示
+			void updateOrderRelateMsgDisplay();
 
 		private slots:
 			// 图像设置
@@ -100,6 +108,8 @@ namespace View {
 			void onComboBoxLoadOrderNumberUsers(int);
 			// 响应加载用户
 			void onButtonToLoadUser();
+			// 确认订单相关信息
+			void onButtonSureInLoadOrderNumber();
 
 		signals:
 			void signalClose();

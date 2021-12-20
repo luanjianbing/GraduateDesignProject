@@ -375,6 +375,30 @@ namespace Controller {
 		return{};
 	}
 
+	std::vector<std::string> DomainController::getTargetOrderMsg(std::string orderNumber) {
+		try {
+			int colNum = mDataBase->findColNumsFromTargetTable("order_info");
+			std::vector<std::vector<std::string>> mTable =
+				mDataBase->queryAllData("order_info", colNum, "order_number", orderNumber, "id", true);
+			std::vector<std::string> tmpInfo;
+			if (mTable.size() == 1) {
+				for (int i = 1; i < mTable[0].size(); ++i) {
+					tmpInfo.push_back(mTable[0][i]);
+				}
+				return tmpInfo;
+			}
+			else {
+				std::cout << "getTargetOrderMsg by orderNumber Error" << std::endl;
+			}
+		}
+		catch (const std::exception &e)
+		{
+			std::cout << "DomainController::getTargetOrderMsg()->" << e.what() << std::endl;
+			return{};
+		}
+		return{};
+	}
+
 	std::vector<std::string> DomainController::readAllModelNames() {
 		try
 		{

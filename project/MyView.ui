@@ -113,7 +113,7 @@
                </spacer>
               </item>
               <item row="0" column="0">
-               <widget class="QLabel" name="label_7">
+               <widget class="QLabel" name="labelSingleResultDisplay">
                 <property name="font">
                  <font>
                   <family>黑体</family>
@@ -276,7 +276,7 @@
                  <enum>QFrame::WinPanel</enum>
                 </property>
                 <property name="text">
-                 <string>本次合格数量：</string>
+                 <string>合格数量：</string>
                 </property>
                </widget>
               </item>
@@ -292,16 +292,6 @@
               </item>
               <item row="2" column="1">
                <widget class="QLabel" name="labelAlreadyOKQuantity">
-                <property name="text">
-                 <string>/</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="1">
-               <widget class="QLabel" name="labelNowFinishQuantity">
                 <property name="text">
                  <string>/</string>
                 </property>
@@ -346,7 +336,7 @@
                  <enum>QFrame::WinPanel</enum>
                 </property>
                 <property name="text">
-                 <string>本次不合格数量：</string>
+                 <string>不合格数量：</string>
                 </property>
                </widget>
               </item>
@@ -357,16 +347,6 @@
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QLabel" name="label_12">
-                <property name="frameShape">
-                 <enum>QFrame::WinPanel</enum>
-                </property>
-                <property name="text">
-                 <string>本次完成数量：</string>
                 </property>
                </widget>
               </item>
@@ -422,6 +402,46 @@
               </item>
               <item row="4" column="3">
                <widget class="QLabel" name="labelNowNGQuantity">
+                <property name="text">
+                 <string>/</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="3">
+               <widget class="QLabel" name="labelNowFinishQuantity">
+                <property name="text">
+                 <string>/</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="2">
+               <widget class="QLabel" name="label_12">
+                <property name="frameShape">
+                 <enum>QFrame::WinPanel</enum>
+                </property>
+                <property name="text">
+                 <string>已完成数量：</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="label_23">
+                <property name="frameShape">
+                 <enum>QFrame::WinPanel</enum>
+                </property>
+                <property name="text">
+                 <string>任务剩余数量：</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLabel" name="labelUserUnFinishQuantity">
                 <property name="text">
                  <string>/</string>
                 </property>

@@ -46,6 +46,12 @@
     <Filter Include="Source Files\View">
       <UniqueIdentifier>{17091c22-1a7e-47ac-8b9d-18338b0c9751}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\SubStructureHeader">
+      <UniqueIdentifier>{87f878c7-83d9-4d2a-bdbc-c57ac7703641}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SubStructure">
+      <UniqueIdentifier>{7da3402f-9eee-49a4-ad0e-df6390d70ed2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="MyView.ui">
@@ -101,6 +107,9 @@
     <ClCompile Include="MyModel\UserCache.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
+    <ClCompile Include="MyModel\Log.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyModel\Camera.h">
@@ -116,6 +125,12 @@
       <Filter>Header Files\ControllerHeader</Filter>
     </ClInclude>
     <ClInclude Include="MyModel\UserCache.h">
+      <Filter>Header Files\ModelHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="MySubStructure\BlockQueue.h">
+      <Filter>Header Files\SubStructureHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="MyModel\Log.h">
       <Filter>Header Files\ModelHeader</Filter>
     </ClInclude>
   </ItemGroup>

@@ -91,6 +91,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="MyModel\Log.cpp" />
     <ClCompile Include="MyModel\UserCache.cpp" />
     <ClCompile Include="MyView\ImageSettingView.cpp" />
     <ClCompile Include="MyView\LauncherView.cpp" />
@@ -114,7 +115,9 @@
   <ItemGroup>
     <ClInclude Include="MyController\Controller.h" />
     <ClInclude Include="MyModel\Algorithm.h" />
+    <ClInclude Include="MyModel\Log.h" />
     <ClInclude Include="MyModel\UserCache.h" />
+    <ClInclude Include="MySubStructure\BlockQueue.h" />
     <QtMoc Include="MyView\LauncherView.h" />
     <QtMoc Include="MyView\LogInView.h" />
     <QtMoc Include="MyView\RegisterNewUserView.h" />
